@@ -1,49 +1,31 @@
 import React, {Component} from 'react';
-import {Map, List} from 'immutable';
-import {connect} from 'redux';
+import {Map} from 'immutable';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-class Word extends Component {
+//style
+import styles from '../style/word.module.scss';
+import classNames from 'classnames/bind';
 
+const cx = classNames.bind(styles);
+
+class Word extends Component {
     static propTypes = {
-        word: ImmutablePropTypes.mapContains({
-            kor : ImmutablePropTypes.listOf(
-                PropTypes.string
-            ),
-            eng : PropTypes.string,
-            id : PropTypes.number,
-            isComplete : PropTypes.bool
-        }),
-        search : ImmutablePropTypes.mapContains({
-            kor : PropTypes.string,
-            eng : PropTypes.string
-        }),
-        mode : PropTypes.string,
-        onCheck : PropTypes.func,
-        onGiveUp : PropTypes.func
+        word : PropTypes.string,
+        id : PropTypes.number
     }
 
     render() {
-        const { word, onCheck, onGiveUp } = this.props;
+        const { word, id } = this.props;
+
         return (
-            <div>
-                <p>ENG</p>
-                <p>KOR</p>
-                <p>IS_COMPLETE</p>
-            </div>
+            <span
+                className={cx('word')}
+            >
+                <p>{word}</p>
+            </span>
         )
     }
-    /*render() {
-        const { word, onCheck, onGiveUp } = this.props;
-        return (
-            <div>
-                <p>{word.get('eng')}</p>
-                <p>{word.get('kor')}</p>
-                <p>{word.get('isComplete')}</p>
-            </div>
-        )
-    }*/
 }
 
 export default Word;
