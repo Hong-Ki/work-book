@@ -1,0 +1,25 @@
+@mixin circleButton ($size, $background, $border, $color) {
+    height: $size;
+    width: $size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+    background: $background;
+    border: $border;
+    color: $color;
+
+    border-radius: 1rem;
+    font-size: 1.15rem;
+
+    &:hover {
+        transform: translateY(-0.1rem); 
+        box-shadow : 0 0 5px 3px white;
+    }
+    
+}
+
+.addButton {
+    @include circleButton( 2rem, transparent, 1px solid white, white);
+}

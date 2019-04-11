@@ -1,0 +1,35 @@
+.wrapper {
+    z-index: 10;
+    position: fixed;
+    display: flex;
+    background: rgba(200, 200, 200, 0.5);
+    top:0;
+    height: 100%;
+    width: 100%;
+
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.box {
+    background:white;
+    width: 600px;
+    
+    div {
+        width:95%;
+        margin: 5px auto;
+    
+    }
+    input {
+        width : 100%;
+        height: 30px;
+
+        margin: auto;
+    }
+
+    .meansList {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+}

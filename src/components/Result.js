@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import classNames from 'classnames/bind';
-import style from '../style/word.module.scss';
+import style from '../style/index.module.scss';
 
 //icons
 import {IoMdVolumeHigh} from 'react-icons/io';
@@ -15,9 +15,9 @@ class Result extends Component {
 
         return (
             <span className={cx('result')}>
-                <p onClick={onSound}>
+                <button className={cx('addButton')} onClick={onSound}>
                     <IoMdVolumeHigh />
-                </p>
+                </button>
             </span>
         )
     }

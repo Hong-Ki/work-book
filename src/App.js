@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import WordBoxListContainer from './containers/WordBoxListContainer';
-import TestForm from './components/TestForm'
+import WordModalContainer from './containers/WordModalContainer';
 import './App.scss';
 
 class App extends Component {
@@ -20,6 +20,7 @@ class App extends Component {
     return (
       <div>
         <WordBoxListContainer />
+        <WordModalContainer/>
       </div>
     );
   }

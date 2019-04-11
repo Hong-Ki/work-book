@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 
 import words from './words';
-import test from './test';
+import modal from './modal';
 
 export default combineReducers({
-    words,test
+    words,modal
 });

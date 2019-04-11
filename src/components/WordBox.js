@@ -21,7 +21,6 @@ class WordBox extends Component {
             ),
             word : PropTypes.string,
             id : PropTypes.number,
-            isComplete : PropTypes.bool,
             wrongCounter : PropTypes.number,
             mode : PropTypes.string
         })
