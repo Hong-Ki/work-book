@@ -45,13 +45,12 @@ export default handleActions ({
         const word = state.getIn(['word']);
         const input = action.payload;
 
-        if ( word.get('word') !== input.word ) {
+        if ( word.get('word') !== input.get('word') ) {
             return state.setIn(['word', 'word'], input.word ); 
         }
 
-        if ( word.get('means').findIndex( mean => mean === input.mean ) < 0 
-                && input.mean !== '' ) {
-            return state.setIn(['word','means'], word.get('means').push(input.mean) );
+        if ( word.get('means').toString() !== input.get('means').toString() ) {
+            return state.setIn(['word','means'], input.get('means'));
         }
 
         return state;

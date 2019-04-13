@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Map, List} from 'immutable';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import {connect} from 'react-redux';
@@ -10,17 +11,69 @@ import * as modalActions from '../modules/modal';
 import Modal from '../components/Modal'
 
 class WordModalContainer extends Component {
-    handleBulr = (mean) => {
-        const {ModalActions, modal } = this.props;
+    handleMean = {
 
-        const input = {
-            word : modal.getIn(['word', 'word']),
-            mean : mean
+        check: (mean) => {
+            const {modal} = this.props;
+            const index = modal.getIn(['word', 'means']).findIndex( value => value === mean);
+            
+            if (index < 0 || mean === '' || mean === null || typeof(mean) === 'undefined' ) {
+                return -1;
+            }
+
+            return index;
+        },
+
+        add : (mean) => {
+            const {ModalActions, modal } = this.props;
+            const isExist = this.handleMean.check(mean);
+
+            // 입력한 뜻이 존재 하지 않을 경우
+            if (isExist < 0 ) {
+
+                const input =Map({
+                    word : modal.getIn(['word', 'word']),
+                    means : modal.getIn(['word', 'means']).push(mean)
+                })
+    
+                ModalActions.change( input );
+            }
+
+        },
+
+        remove : (id) => {
+            const { ModalActions, modal }= this.props;
+            const index = Number(id);
+
+            if (index < modal.getIn(['word','means']).size ){
+                const input = Map({
+                    word : modal.getIn(['word', 'word']),
+                    means : modal.getIn(['word','means']).delete(index)
+                });
+
+                console.log(input.toJS())
+
+                ModalActions.change(input);
+            }
+            
+        },
+
+        change: (id, mean)=> {
+            const { ModalActions, modal }= this.props;
+            const index = Number(id);
+
+            if (index < modal.getIn(['word','means']).size 
+                    && modal.getIn(['word','means',index]) !== mean ){
+                const input = Map({
+                    word : modal.getIn(['word', 'word']),
+                    means : modal.getIn(['word','means']).set(index, mean)
+                });
+
+                console.log(input.toJS())
+
+                ModalActions.change(input);
+            }
         }
-
-        ModalActions.change(
-            input
-        );
 
     }
 
@@ -38,14 +91,15 @@ class WordModalContainer extends Component {
     }
 
     render () {
-        const {handleBulr, handleChange} = this;
+        const {handleMean, handleChange} = this;
         const {modal} = this.props;
         return (
             <Modal
                 modal={modal}
-                onBlur={handleBulr}
+                onAdd={handleMean['add']}
                 onChange={handleChange}
-            />
+                onRemove={handleMean['remove']}
+x            />
         );
     }
 }
