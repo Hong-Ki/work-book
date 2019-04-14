@@ -96,9 +96,10 @@ class WordModalContainer extends Component {
         return (
             <Modal
                 modal={modal}
-                onAdd={handleMean['add']}
                 onChange={handleChange}
-                onRemove={handleMean['remove']}
+                onAddMean={handleMean['add']}
+                onChageMean={handleMean['change']}
+                onRemoveMean={handleMean['remove']}
 x            />
         );
     }

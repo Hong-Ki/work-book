@@ -5,24 +5,14 @@ import WordBox from './WordBox';
 import classNames from 'classnames/bind';
 import styles from '../style/modal.module.scss';
 
-//icons
-import {IoMdVolumeHigh} from 'react-icons/io';
+import MeanList from './MeanList';
 
 const cx = classNames.bind(styles);
 
 class Modal extends Component {
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.props.modal.getIn(['word', 'means']).toJS().toString()
-                === nextProps.modal.getIn(['word', 'means']).toJS().toString() ) {
-                    return false;
-        }
-
-        return true;
-    }
-
     handleBlur = ( e ) => {
-        const {onAdd} = this.props;
+        const {onAddMean} = this.props;
         const mean = e.target.value;
 
         if (mean === '' || mean === null || typeof(mean) === 'undefined') {
@@ -31,7 +21,7 @@ class Modal extends Component {
         
         e.target.value='';
 
-        onAdd( mean );
+        onAddMean( mean );
     }
 
     handleKeyPress = (e) => {
@@ -42,34 +32,14 @@ class Modal extends Component {
         }
     }
 
-    handleClick = (e) => {
-        const {onRemove} = this.props;
-        onRemove( e.target.id );
-    }
-
     handleChange = (e) => {
         const {onChange} =this.props;
         onChange(e.target.value);
     }
 
     render() {
-        const { handleBlur, handleChange, handleKeyPress, handleClick } = this;
-        const {modal} = this.props;
-
-        let idx =0;
-        const meanList = modal.getIn(['word', 'means']).map( mean => (
-            <div className={cx('mean')}
-                id={idx}
-                key={idx++}
-                onClick={handleClick}
-            >
-                {mean}
-                <div className={cx('button')}>
-                    <IoMdVolumeHigh/>
-                    <IoMdVolumeHigh/>
-                </div>
-            </div>
-        )) 
+        const { handleBlur, handleChange, handleKeyPress } = this;
+        const {modal, onChangeMean, onRemoveMean} = this.props;
 
         return (
             <div className={cx('wrapper')}>
@@ -83,9 +53,11 @@ class Modal extends Component {
                                 placeholder='단어'
                                 onChange={handleChange}
                             />
-                        </div>
-                        <div className={cx('meansList')}>
-                            {meanList}
+                        <MeanList
+                            means = {modal.getIn(['word', 'means'])}
+                            onChangeMean = {onChangeMean}
+                            onRemoveMean = {onRemoveMean}
+                        />
                         </div>
                         <div>
                             <input
