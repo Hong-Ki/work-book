@@ -6,7 +6,6 @@ class WordBoxList extends Component {
     
     render() {
         const { words, search, mode, onSound } = this.props;
-
         const wordList = words.
                             map(
                                 word => (

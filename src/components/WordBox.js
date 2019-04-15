@@ -16,11 +16,11 @@ class WordBox extends Component {
     
     static propTypes = {
         word: ImmutablePropTypes.mapContains({
-            mean : ImmutablePropTypes.listOf(
+            means : ImmutablePropTypes.listOf(
                 PropTypes.string
             ),
             word : PropTypes.string,
-            id : PropTypes.number,
+            // id : PropTypes.number,
             wrongCounter : PropTypes.number,
             mode : PropTypes.string
         })
@@ -36,8 +36,8 @@ class WordBox extends Component {
 
     render() {
         const { word,mode } = this.props;
-        const { handleChange, handleTest, handleSound } = this;
 
+        const { handleChange, handleTest, handleSound } = this;
         return (
             <div className={cx('container')}>
                 <Word 
@@ -45,7 +45,7 @@ class WordBox extends Component {
                     id={word.get('id')}
                 />
                 <Means
-                    means={word.get('mean')}
+                    means={word.get('means')}
                     mode={mode}
                 />
                 <Result

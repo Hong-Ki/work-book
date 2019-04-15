@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import WordBoxListContainer from './containers/WordBoxListContainer';
 import WordModalContainer from './containers/WordModalContainer';
+import { connect } from 'react-redux'
 import './App.scss';
+
+
+import { bindActionCreators } from 'redux';
 
 class App extends Component {
 
@@ -26,4 +30,8 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  (state) => ({
+  }),
+  (dispatch) => ({})
+)(App);

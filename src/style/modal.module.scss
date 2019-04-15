@@ -15,6 +15,7 @@
 
     &:hover {
         background: $hoverColor;
+        cursor: pointer;
     }
 
     &>span {
@@ -101,8 +102,8 @@
             }
         }
 
-        .text {
-            width:100%;
+        &>input {
+            border: 0px;
         }
 
         .button {
@@ -114,12 +115,33 @@
             right: -3rem;
             width: 2rem;
             height: 100%;
-            opacity: 1;
+            opacity: 0;
             transition: all .4s;
+            color : gray;
+
+            svg:hover {
+                cursor: pointer;
+                color: black;
+            }
+
         }
     }
-
 }
+
+.text {
+    width:100%;
+}
+
+.submit {
+    width: 10%;
+    color:gray;
+
+    &:hover {
+        cursor: pointer;
+        color:black;
+    }
+}
+
 
 
 .add { 

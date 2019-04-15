@@ -25,7 +25,7 @@ class Modal extends Component {
     }
 
     handleKeyPress = (e) => {
-        if (e.keyCode === 13 || e.keyCode === 9) {
+        if ( (e.keyCode === 13 || e.keyCode === 9) && e.target.value !== '' ) {
             e.preventDefault();
             e.target.blur();
             e.target.focus();
@@ -39,7 +39,7 @@ class Modal extends Component {
 
     render() {
         const { handleBlur, handleChange, handleKeyPress } = this;
-        const {modal, onChangeMean, onRemoveMean} = this.props;
+        const {modal, onChangeMean, onRemoveMean, onAdd, onCancel} = this.props;
 
         return (
             <div className={cx('wrapper')}>
@@ -63,14 +63,20 @@ class Modal extends Component {
                             <input
                                 placeholder='Mean'
                                 onBlur={handleBlur}
-                                onKeyDown={handleKeyPress}
+                                onKeyPress={handleKeyPress}
                             />
                         </div>
                     </div>
-                    <div className={cx('add')}>
+                    <div 
+                        className={cx('add')}
+                        onClick={onAdd}
+                    >
                         <span>ADD</span>
                     </div>
-                    <div className={cx('cancel')}>
+                    <div 
+                        className={cx('cancel')}
+                        onClick={onCancel}
+                    >
                         <span>CANCEL</span>
                     </div>
                 </div>
