@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import shortid from 'shortid';
 
 import * as wordsActions from '../modules/words';
 import * as modalActions from '../modules/modal';
@@ -56,15 +57,16 @@ class WordModalContainer extends Component {
     }
 
     handleAdd = () => {
-        const {WordsActions, modal} = this.props;
+        const {WordsActions, ModalActions, modal} = this.props;
         const word = Map({
             word : modal.getIn(['word', 'word']),
             means : modal.getIn(['word', 'means']).map(mean => mean.get('mean')),
             isComplete : false,
-            id : 0
+            id : shortid.generate()
         });
 
         WordsActions.create(word);
+        ModalActions.hide();
     }
 
     handleCancel = () => {

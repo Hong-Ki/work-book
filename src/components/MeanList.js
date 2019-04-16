@@ -64,6 +64,7 @@ class MeanList extends Component {
         const { means } = this.props;
         const { handleChange, handleRemove, handleBlur, handleKeyPress} = this;
         let index = -1;
+        debugger;
         const meanList = means.map( 
             mean => mean.get('isEditMode') ?
             (

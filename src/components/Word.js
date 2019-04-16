@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 class Word extends Component {
     static propTypes = {
         word : PropTypes.string,
-        id : PropTypes.number
+        id : PropTypes.string
     }
 
     render() {

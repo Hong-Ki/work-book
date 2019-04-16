@@ -18,7 +18,7 @@ export const changeMean = createAction(CHANGE_MEAN); // input{ index, mean}
 
 
 const initialState = Map ( {
-    visible:true,
+    visible:false,
     mode:null,
     word: Map ( {
         id : null,
@@ -30,15 +30,22 @@ const initialState = Map ( {
 
 export default handleActions ({
     [SHOW]: (state, action) => {
-        const {mode, word} = action.payload;
-        
-        return state.set('visible',true)
-        .set('mode', mode)
-        .set('word', Map(word))
-        
+        let word;
+        if ( typeof (action.payload) !== 'undefined') {
+            word = action.payload;
+        } else {
+            word = initialState.get('word');
+        }
+
+        return state.set('visible',true).set('word', word);
     },
     [HIDE]: (state, action) => {
-        return state.set('visible', false); 
+        return state.set('visible', false).set('word', Map ( {
+            id : null,
+            word : '',
+            means: List([]), // means : [{mean:string, isEidtMode:boolean}]
+            wrongCounter : -1
+        })); 
     },
     [CHANGE]: (state, action) => {
         const word = state.getIn(['word']);

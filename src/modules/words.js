@@ -4,20 +4,18 @@ import {createAction, handleActions} from 'redux-actions';
 const CREATE = 'word/CREATE';
 const UPDATE = 'word/UPDATE';
 const REMOVE = 'word/REMOVE';
-const SOUND = 'word/SOUND';
 const LOAD_WORDS = 'word/LOAD_WORDS';
 
 export const create = createAction(CREATE); // {id, word, means[], isComplete, wrongCount }
 export const update = createAction(UPDATE); // id, word{ word, means[], isComplete, wrongCount } 
 export const remove = createAction(REMOVE); // id
-export const sound = createAction(SOUND); // id
 export const loadWords = createAction(LOAD_WORDS); 
 
 const initialState = List([
     Map({
         means : List(["T","E","S","T","1"]),
         word : "TEST_1",
-        id : 1,
+        id : '1',
         isComplete : false
     })/*,
    Map({
@@ -151,7 +149,7 @@ export default handleActions({
         
         return state.delete(index);
     },
-    [SOUND] : (state, action) => {
+    /*[SOUND] : (state, action) => {
         const index = state.findIndex( word => word.get('id') === action.payload );
         let msg = new SpeechSynthesisUtterance(state.getIn([index, 'word']));
         msg.lang='en-us';
@@ -161,7 +159,9 @@ export default handleActions({
 
         speechSynthesis.speak(msg);
 
-    },
+        return state;
+
+    },*/
     [LOAD_WORDS] : (state, action) => {
         return fromJS(action.payload);
     }

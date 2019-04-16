@@ -20,7 +20,7 @@ class WordBox extends Component {
                 PropTypes.string
             ),
             word : PropTypes.string,
-            // id : PropTypes.number,
+            id : PropTypes.string,
             wrongCounter : PropTypes.number,
             mode : PropTypes.string
         })
@@ -29,17 +29,23 @@ class WordBox extends Component {
         // onGiveUp : PropTypes.func
     }
 
-    handleSound = () => {
-        const {onSound, word} = this.props;
-        onSound(word.get('id'));
+    handleEdit = (e) => {
+        const {onEdit} = this.props;
+        if ( e.target.tagName === 'DIV' || e.target.tagName === 'SPAN' ) {
+            
+            onEdit(e.target.closest('div').id);
+        }
     }
 
     render() {
-        const { word,mode } = this.props;
+        const { word,mode, onEdit } = this.props;
+        const {handleEdit} = this;
 
-        const { handleChange, handleTest, handleSound } = this;
         return (
-            <div className={cx('container')}>
+            <div className={cx('container')}
+                id={word.get('id')}
+                onClick={handleEdit}
+            >
                 <Word 
                     word={word.get('word')} 
                     id={word.get('id')}
@@ -50,8 +56,8 @@ class WordBox extends Component {
                 />
                 <Result
                     id={word.get('id')}
+                    word={word.get('word')}
                     isComplete={word.get('isComplete')}
-                    onSound={handleSound}
                 />
             </div>
         )

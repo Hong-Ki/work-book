@@ -25,3 +25,14 @@
 .addButton {
     @include circleButton( 2rem, transparent, 1px solid white, white);
 }
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+    &:hover {
+        color: red;
+    }
+}

@@ -1,0 +1,50 @@
+@import '~open-color/open-color';
+@import '~include-media/dist/include-media';
+
+.header {
+    /* 레이아웃 */
+	height: 8vh;
+	background: $oc-teal-6;
+    border-bottom: 0px solid $oc-teal-8;
+    margin: 0 0 auto;
+    /* 폰트 설정 */
+    color: white;
+    font-weight: 500;
+    font-size: 1.5rem;
+    /* 가운데로 정렬 */
+    display: flex;
+    align-items: center; /* 세로 정렬 */
+    justify-content: center; /* 가로 정렬 */
+}
+
+html, body, body>div{
+    margin: 0;
+    height: 100%;
+}
+
+.wrapper {
+    height: 100vh;
+}
+
+.body {
+    height: 85vh;
+    margin: 0 0 auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.footer {
+    /* 레이아웃 */
+    height: 7vh;
+    margin: 0 0 auto;
+	background: $oc-teal-6;
+    border-bottom: 0px solid $oc-teal-8;
+    /* 폰트 설정 */
+    color: white;
+    font-weight: 500;
+    font-size: 1.5rem;
+    /* 가운데로 정렬 */
+    display: flex;
+    align-items: center; /* 세로 정렬 */
+    justify-content: center; /* 가로 정렬 */
+}

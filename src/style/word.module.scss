@@ -1,15 +1,21 @@
 .container {
     width : 96%;
-    border-radius: 3px;
+    border-radius: 1rem;
     height: 3.5rem;
     margin: 5px auto;
     vertical-align: middle;
     display: flex;
-    transition: all 1s ease-in;
+    transition: all 0.2s ease-out;
+
+    &:hover {
+        box-shadow: 0px 0px 10px 0px black;
+        cursor: pointer;
+    }
+
 }
 
 @mixin contents ($width, $color, $radius) {
-    transition: all 1s ease-in-out;
+    transition: all 0.2s ease-out;
     height: 100%;
     display: flex;
     width: $width;
@@ -23,8 +29,8 @@
         margin: auto;
         text-align: center;
         width: 100%;
-    }
 
+    }
 }
 
 .word {

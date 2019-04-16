@@ -7,28 +7,38 @@ import {bindActionCreators} from 'redux';
 
 import * as wordsActions from '../modules/words';
 import * as testActions from '../modules/test';
+import * as modalActions from '../modules/modal';
 
 import WordBoxList from '../components/WordBoxList';
 
 import classNames from 'classnames/bind';
 
 class WordBoxListContainer extends Component {
+    handleEdit = (id) => {
+        const {ModalActions, words} = this.props;
+        const index = words.findIndex( word => word.get('id') === id );
+        const word = words.get(index).set('means' ,
+            words.get(index).get('means').map( 
+                mean => Map({
+                mean : mean,
+                isEditMode : false
+        })));
 
-    handleSound = (id) => {
-        const {WordsActions} = this.props;
-        WordsActions.sound(id);
+        ModalActions.show(word);
+
+
     }
 
     render() {
         const {words, keyword, mode} = this.props;
-        const {handleSound} = this;
+        const {handleEdit} = this;
 
         return (
             <WordBoxList
                 words={words}
                 search={keyword}
                 mode={mode}
-                onSound={handleSound}
+                onEdit={handleEdit}
             />
         )
     }
@@ -44,6 +54,7 @@ export default connect(
     }),
     (dispatch) => ({
         WordsActions: bindActionCreators(wordsActions, dispatch),
+        ModalActions: bindActionCreators(modalActions, dispatch),
         TestActions: bindActionCreators(testActions, dispatch)
     })
 ) (WordBoxListContainer);

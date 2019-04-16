@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import classNames from 'classnames/bind';
+
+//components
+import Header from './components/Header';
+
+//containers
 import WordBoxListContainer from './containers/WordBoxListContainer';
 import WordModalContainer from './containers/WordModalContainer';
+import FooterContainer from './containers/FooterContainer';
+
+import * as layout from './style/layout.module.scss';
 import { connect } from 'react-redux'
-import './App.scss';
 
-
-import { bindActionCreators } from 'redux';
+const cx = classNames.bind(layout);
 
 class App extends Component {
 
@@ -22,9 +29,16 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <WordBoxListContainer />
+      <div className={cx('wrapper')}>
+        <Header/>
+        
+        <div className={cx('body')}>
+          <WordBoxListContainer />
+        </div>
+
+        <FooterContainer/>
         <WordModalContainer/>
+
       </div>
     );
   }

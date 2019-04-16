@@ -40,7 +40,6 @@ class Modal extends Component {
     render() {
         const { handleBlur, handleChange, handleKeyPress } = this;
         const {modal, onChangeMean, onRemoveMean, onAdd, onCancel} = this.props;
-
         return (
             <div className={cx('wrapper')}>
                 <div className={cx('box')}>
@@ -51,8 +50,9 @@ class Modal extends Component {
                         <div>
                             <input
                                 placeholder='단어'
+                                defaultValue={modal.getIn(['word','word'])}
                                 onChange={handleChange}
-                            />
+                                />
                         <MeanList
                             means = {modal.getIn(['word', 'means'])}
                             onChangeMean = {onChangeMean}
