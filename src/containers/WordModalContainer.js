@@ -47,11 +47,12 @@ class WordModalContainer extends Component {
             
         },
 
-        change: (idx, mean)=> {
+        change: (index, mean)=> {
             const { ModalActions, modal }= this.props;
-            const index = Number(idx);
-
+            const means = modal.getIn( ['word', 'means'] );
+ 
             ModalActions.changeMean( {index, mean} );
+
         }
 
     }

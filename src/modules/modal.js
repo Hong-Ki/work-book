@@ -75,6 +75,7 @@ export default handleActions ({
         const means = state.getIn(['word', 'means']);
         const {index, mean} = action.payload;
 
+        console.log('modal.js:',index);
         if ( means.getIn([index, 'isEditMode']) ) {
             //to Apply == now EditMode
             return state.setIn(['word', 'means', index], Map ({isEditMode:false, mean:mean}) );

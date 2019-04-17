@@ -33,29 +33,37 @@ class MeanList extends Component {
     }
     
     handleChange = (e) => {
-            const index = e.target.getAttribute('index');
-            const { onChangeMean } = this.props;
-            
-            onChangeMean( index );
+        const index = Number(e.target.closest('div').getAttribute('index'));
+        const { onChangeMean } = this.props;
+        
+        onChangeMean( index );
     }
     
     handleBlur = (e) => {
         const {value} = e.target;
-        const index = e.target.getAttribute('index');
-        const {onChangeMean} = this.props;
-
-        onChangeMean( index, value );
+        const index = Number(e.target.getAttribute('index'));
+        const {onChangeMean, means } = this.props;
+        const findIndex = means.findIndex(mean => mean.get('mean').trim() === value.trim() );
+        let mean = value;
+        
+        if ( findIndex > -1 && index !== findIndex ) {
+            alert('이미 존재하는 값입니다.');
+            mean = means.getIn([index, 'mean']);
+        }
+        
+        onChangeMean( index, mean );
+        
     }
-
+    
     handleKeyPress = (e) => {
         if ( (e.keyCode === 13 || e.keyCode === 9 || e.key === 'Enter') && e.target.value !== '' ) {
             e.target.blur();
         }
     }
-
+    
     handleRemove = (e) => {
         const { onRemoveMean } = this.props;
-        const index = e.target.getAttribute('index');
+        const index = e.target.closest('div').getAttribute('index');
         
         onRemoveMean(index);
     }
@@ -88,13 +96,14 @@ class MeanList extends Component {
                     key={++index}
                 >
                     <div className={cx('text')}>{mean.get('mean')}</div>
-                    <div className={cx('button')} >
+                    <div 
+                        className={cx('button')} 
+                        index={index}
+                    >
                         <MdEdit 
-                            index={index}
                             onClick={handleChange}
-                        />
+                            />
                         <MdDelete
-                            index={index}
                             onClick={handleRemove}
                         />
                     </div>
