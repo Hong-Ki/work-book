@@ -7,7 +7,6 @@ const cx = classNames.bind(styles);
 
 const Button = ({children, ...rest}) => {
 
-    console.log(rest);
     return (
         <div 
             className={cx(rest.className)}

@@ -49,7 +49,7 @@ class WordBox extends Component {
                 <Word 
                     word={word.get('word')} 
                     id={word.get('id')}
-                />
+                    />
                 <Means
                     means={word.get('means')}
                     mode={mode}

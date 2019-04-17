@@ -19,11 +19,11 @@ class Word extends Component {
         const { word, id } = this.props;
 
         return (
-            <span
+            <div
                 className={cx('word')}
             >
-                <p>{word}</p>
-            </span>
+                {word}
+            </div>
         )
     }
 }

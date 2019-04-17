@@ -1,20 +1,20 @@
 @import '~open-color/open-color';
 @import '~include-media/dist/include-media';
 
-.header {
-    /* 레이아웃 */
-	height: 8vh;
-	background: $oc-teal-6;
-    border-bottom: 0px solid $oc-teal-8;
+@mixin bar ($height, $background) {
+    height: $height;
+	background: $background;
     margin: 0 0 auto;
-    /* 폰트 설정 */
     color: white;
     font-weight: 500;
-    font-size: 1.5rem;
-    /* 가운데로 정렬 */
+    font-size: 1.7rem;
     display: flex;
     align-items: center; /* 세로 정렬 */
     justify-content: center; /* 가로 정렬 */
+}
+
+.header {
+    @include bar(8vh, $oc-violet-3);
 }
 
 html, body, body>div{
@@ -34,17 +34,5 @@ html, body, body>div{
 }
 
 .footer {
-    /* 레이아웃 */
-    height: 7vh;
-    margin: 0 0 auto;
-	background: $oc-teal-6;
-    border-bottom: 0px solid $oc-teal-8;
-    /* 폰트 설정 */
-    color: white;
-    font-weight: 500;
-    font-size: 1.5rem;
-    /* 가운데로 정렬 */
-    display: flex;
-    align-items: center; /* 세로 정렬 */
-    justify-content: center; /* 가로 정렬 */
+    @include bar(7vh, $oc-violet-2);
 }

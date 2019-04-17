@@ -1,4 +1,6 @@
-@mixin circleButton ($size, $background, $border, $color) {
+@import '~open-color/open-color';
+
+@mixin circleButton ($size, $background, $border, $color, $hoverColor) {
     height: $size;
     width: $size;
     display: flex;
@@ -15,7 +17,7 @@
 
     &:hover {
         transform: translateY(-0.1rem); 
-        box-shadow : 0 0 5px 3px white;
+        box-shadow : 0 0 10px 0px $hoverColor;
         cursor: pointer;
 
     }
@@ -23,7 +25,7 @@
 }
 
 .addButton {
-    @include circleButton( 2rem, transparent, 1px solid white, white);
+    @include circleButton( 2rem, transparent, 2px solid $oc-violet-3, $oc-violet-3, $oc-violet-4);
 }
 
 .button {

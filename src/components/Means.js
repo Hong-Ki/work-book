@@ -23,7 +23,7 @@ class Means extends Component {
     }
 
     render() {
-        const { means, mode, onChange, onTest } = this.props;
+        const { means, mode, onChange, onTest, onEdit } = this.props;
         let contents;
 
         if ( mode === 'test' ) {
@@ -39,16 +39,15 @@ class Means extends Component {
             for ( let i=1; i<means.size; i++ ) {
                 contents += (", "+means.toJS()[i]);
             }
-
-            contents = (<p> {contents} </p>)
         }
         
         return (
-            <span
+            <div
+                onClick={onEdit}
                 className={cx('mean')}
             >
                 {contents}
-            </span>
+            </div>
         )
     }
 }

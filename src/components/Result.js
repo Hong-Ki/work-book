@@ -26,11 +26,11 @@ class Result extends Component {
         const {handleSound} = this;
         
         return (
-            <span className={cx('result')}>
+            <div className={cx('result')}>
                 <button className={cx('addButton')} onClick={handleSound}>
                     <IoMdVolumeHigh />
                 </button>
-            </span>
+            </div>
         )
     }
 }
