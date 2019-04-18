@@ -10,6 +10,7 @@ import * as testActions from '../modules/test';
 import * as modalActions from '../modules/modal';
 
 import WordBoxList from '../components/WordBoxList';
+import Word from '../class/Word';
 
 import classNames from 'classnames/bind';
 
@@ -17,12 +18,13 @@ class WordBoxListContainer extends Component {
     handleEdit = (id) => {
         const {ModalActions, words} = this.props;
         const index = words.findIndex( word => word.get('id') === id );
-        const word = words.get(index).set('means' ,
-            words.get(index).get('means').map( 
-                mean => Map({
-                mean : mean,
-                isEditMode : false
-        })));
+        const word = new Word(words.get(index).toJS()).toModal();
+        //const word = words.get(index).set('means' ,
+        //    words.get(index).get('means').map( 
+        //        mean => Map({
+        //        mean : mean,
+        //        isEditMode : false
+        //})));
 
         ModalActions.show(word);
 

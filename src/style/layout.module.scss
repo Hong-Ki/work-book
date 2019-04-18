@@ -14,7 +14,7 @@
 }
 
 .header {
-    @include bar(8vh, $oc-violet-3);
+    @include bar(8vh, $oc-red-5);
 }
 
 html, body, body>div{
@@ -34,5 +34,9 @@ html, body, body>div{
 }
 
 .footer {
-    @include bar(7vh, $oc-violet-2);
+    @include bar(7vh, $oc-red-4);
+    &:hover {
+        background: $oc-red-5;
+        cursor: pointer;
+    }
 }

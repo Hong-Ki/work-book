@@ -19,7 +19,7 @@ export const changeMean = createAction(CHANGE_MEAN); // input{ index, mean}
 
 const initialState = Map ( {
     visible:false,
-    mode:null,
+    mode:'',
     word: Map ( {
         id : null,
         word : '',
@@ -30,14 +30,13 @@ const initialState = Map ( {
 
 export default handleActions ({
     [SHOW]: (state, action) => {
-        let word;
+        let word = initialState.get('word'), mode = 'add';
         if ( typeof (action.payload) !== 'undefined') {
             word = action.payload;
-        } else {
-            word = initialState.get('word');
+            mode = 'change';
         }
 
-        return state.set('visible',true).set('word', word);
+        return state.set('visible',true).set('word', word).set('mode',mode);
     },
     [HIDE]: (state, action) => {
         return state.set('visible', false).set('word', Map ( {
@@ -75,7 +74,6 @@ export default handleActions ({
         const means = state.getIn(['word', 'means']);
         const {index, mean} = action.payload;
 
-        console.log('modal.js:',index);
         if ( means.getIn([index, 'isEditMode']) ) {
             //to Apply == now EditMode
             return state.setIn(['word', 'means', index], Map ({isEditMode:false, mean:mean}) );

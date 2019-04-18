@@ -6,6 +6,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import shortid from 'shortid';
 
+import Word from '../class/Word';
+
 import * as wordsActions from '../modules/words';
 import * as modalActions from '../modules/modal';
 
@@ -52,22 +54,30 @@ class WordModalContainer extends Component {
             const means = modal.getIn( ['word', 'means'] );
  
             ModalActions.changeMean( {index, mean} );
-
         }
 
     }
 
-    handleAdd = () => {
-        const {WordsActions, ModalActions, modal} = this.props;
-        const word = Map({
-            word : modal.getIn(['word', 'word']),
-            means : modal.getIn(['word', 'means']).map(mean => mean.get('mean')),
-            isComplete : false,
-            id : shortid.generate()
-        });
+    handleWord = {
+        add: () => {
+            const {WordsActions, ModalActions, modal} = this.props;
+            const word = Map({
+                word : modal.getIn(['word', 'word']),
+                means : modal.getIn(['word', 'means']).map(mean => mean.get('mean')),
+                isComplete : false,
+                id : shortid.generate()
+            });
 
-        WordsActions.create(word);
-        ModalActions.hide();
+            WordsActions.create(word);
+            ModalActions.hide();
+        },
+        change: () => {
+            const {WordsActions, ModalActions, modal} =this.props;
+            const word = new Word( modal.get('word').toJS() ).fromModal();
+            
+            WordsActions.update(word);
+            ModalActions.hide();
+        }
     }
 
     handleCancel = () => {
@@ -89,19 +99,21 @@ class WordModalContainer extends Component {
     }
 
     render () {
-        const {handleMean, handleChange, handleAdd, handleCancel} = this;
+        const {handleMean, handleChange, handleWord, handleCancel} = this;
         const {modal} = this.props;
+
         return (
             <div>
                 {
                     modal.get('visible') && (
                                     <Modal
                                         modal={modal}
+                                        mode={modal.get('mode')}
                                         onChange={handleChange}
                                         onAddMean={handleMean['add']}
                                         onChangeMean={handleMean['change']}
                                         onRemoveMean={handleMean['remove']}
-                                        onAdd={handleAdd}
+                                        onAdd={handleWord[modal.get('mode')]}
                                         onCancel={handleCancel}
                                     />
                     )

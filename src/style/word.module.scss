@@ -3,15 +3,16 @@
 .container {
     width : 96%;
     border-radius: 1rem;
-    height: 3.5rem;
-    margin: 5px auto;
+    height: 3rem;
+    margin: 15px auto;
     vertical-align: middle;
     display: flex;
     transition: all 0.2s ease-out;
 
     &:hover {
+        box-shadow: none;
         &>div {
-            box-shadow: 0px 0px 10px 0px $oc-violet-4;
+            box-shadow: 0px 0px 10px 0px $oc-red-3;
             cursor: pointer;
         }
     }
@@ -25,9 +26,9 @@
     display: flex;
     width: $width;
     border-radius: $radius;
-    color : $oc-violet-6;
-    border: 2px solid $oc-violet-3;
-
+    color : $oc-red-5;
+    //border: 2px solid $oc-red-5;
+    box-shadow: 1px 1px 7px 0px $oc-red-2;
     align-items: center;
     justify-content: center;
     

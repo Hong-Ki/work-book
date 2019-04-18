@@ -24,11 +24,11 @@ class FooterContainer extends Component {
         const {handleShow} = this;
 
         return (
-            <div className={cx('footer')}>
-                <Button
-                    className={'button'}
-                    onClick={handleShow}
-                >
+            <div 
+                className={cx('footer')}
+                onClick={handleShow}
+            >
+                <Button>
                     <MdAdd/>
                 </Button>
             </div>

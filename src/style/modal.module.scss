@@ -48,7 +48,7 @@
     height: 45px;
     border-radius: 5px;
     color: white;
-    background: $oc-violet-3;
+    background: $oc-red-5;
     
     &>p {
         margin: auto;
@@ -81,14 +81,14 @@
     margin: auto;
     height: auto;
     border-radius: 5px;
-    border: 1px solid $oc-violet-2;
+    border: 1px solid $oc-red-4;
     border-width: thin;
     
     input{ 
-        @include placeholder($oc-violet-2);
-        color: $oc-violet-3;
+        @include placeholder($oc-red-4);
+        color: $oc-red-5;
         padding-left: 0.5em;
-        border: 1px solid $oc-violet-2;
+        border: 1px solid $oc-red-4;
         border-width: thin;
         height: 30px;
         width :98%;
@@ -108,12 +108,12 @@
     .mean {
         overflow: hidden;
         display: flex;
-        color:$oc-violet-3;
+        color:$oc-red-5;
 
         justify-content: center;
         align-items: center;
 
-        border: 1px solid $oc-violet-2;
+        border: 1px solid $oc-red-4;
         height: 1.5rem;
         border-radius: 3px;
         margin: 2px auto;
@@ -121,7 +121,7 @@
         text-align: center;
         
         &:hover {
-            box-shadow: 0px 0px 3px 0px $oc-violet-3;
+            box-shadow: 0px 0px 3px 0px $oc-red-5;
             .button {
                 opacity: 1;
                 right: 0rem;
@@ -143,11 +143,11 @@
             height: 100%;
             opacity: 0;
             transition: all .4s;
-            color : $oc-violet-2;
+            color : $oc-red-4;
 
             svg:hover {
                 cursor: pointer;
-                color: $oc-violet-3;
+                color: $oc-red-5;
             }
 
         }
@@ -160,20 +160,20 @@
 
 .submit {
     width: 10%;
-    color:$oc-violet-2;
+    color:$oc-red-4;
 
     &:hover {
         cursor: pointer;
-        color:$oc-violet-3;
+        color:$oc-red-5;
     }
 }
 
 
 
 .add { 
-    @include modalButton( $oc-indigo-3, $oc-indigo-4 , white, left )
+    @include modalButton( $oc-red-4, $oc-red-5 , white, left )
 }
 
 .cancel {
-    @include modalButton( $oc-grape-3, $oc-grape-4, white, right )
+    @include modalButton( $oc-gray-4, $oc-gray-5, white, right )
 }

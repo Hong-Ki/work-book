@@ -141,8 +141,10 @@ export default handleActions({
     [UPDATE] : (state, action) => {
         const index = state.findIndex( word => word.get('id') === action.payload.id );
 
-        return state.mergeIn([index], action.payload.word);
-
+        if ( !action.payload.isEqual( state.get(index).toJS() ) ) {
+            const word = action.payload.toImmutable();
+            return state.mergeIn([index],  word);
+        }
     },
     [REMOVE] : (state, action) => {
         const index = state.findIndex( word => word.get('id') === action.payload );

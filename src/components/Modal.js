@@ -39,12 +39,19 @@ class Modal extends Component {
 
     render() {
         const { handleBlur, handleChange, handleKeyPress } = this;
-        const {modal, onChangeMean, onRemoveMean, onAdd, onCancel} = this.props;
+        const {modal, onChangeMean, onRemoveMean, onAdd, onCancel, mode} = this.props;
+
+        let modeString = '등록';
+
+        if (mode === 'change') {
+            modeString = '수정';
+        }
+
         return (
             <div className={cx('wrapper')}>
                 <div className={cx('box')}>
                     <div className={cx('title')}> 
-                        <p>단어 등록</p>
+                        <p>단어 {modeString}</p>
                     </div>
                     <div className={cx('contents')}>
                         <div>
@@ -71,13 +78,13 @@ class Modal extends Component {
                         className={cx('add')}
                         onClick={onAdd}
                     >
-                        <span>ADD</span>
+                        <span>{modeString}</span>
                     </div>
                     <div 
                         className={cx('cancel')}
                         onClick={onCancel}
                     >
-                        <span>CANCEL</span>
+                        <span>취소</span>
                     </div>
                 </div>
             </div>

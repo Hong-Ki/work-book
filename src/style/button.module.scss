@@ -25,7 +25,7 @@
 }
 
 .addButton {
-    @include circleButton( 2rem, transparent, 2px solid $oc-violet-3, $oc-violet-3, $oc-violet-4);
+    @include circleButton( 2rem, transparent, 2px solid $oc-red-5, $oc-red-5, $oc-red-3);
 }
 
 .button {
