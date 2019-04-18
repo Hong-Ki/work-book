@@ -38,7 +38,7 @@ class WordBox extends Component {
     }
 
     render() {
-        const { word,mode, onEdit } = this.props;
+        const { word,mode, onEdit, onRemove } = this.props;
         const {handleEdit} = this;
 
         return (
@@ -57,6 +57,7 @@ class WordBox extends Component {
                 <Result
                     id={word.get('id')}
                     word={word.get('word')}
+                    onRemove={onRemove}
                     isComplete={word.get('isComplete')}
                 />
             </div>

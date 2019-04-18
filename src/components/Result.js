@@ -3,8 +3,11 @@ import React, {Component} from 'react';
 import classNames from 'classnames/bind';
 import style from '../style/index.module.scss';
 
+import Button from './Button';
+
 //icons
 import {IoMdVolumeHigh} from 'react-icons/io';
+import {MdDelete} from 'react-icons/md';
 
 const cx = classNames.bind(style);
 
@@ -21,15 +24,30 @@ class Result extends Component {
         speechSynthesis.speak(msg);
     }
 
+    handleRemove = (e) => {
+        const {id, onRemove} =this.props;
+
+        onRemove(id);
+    }
+
     render() {
         const {isComplete, onSound, id} = this.props;
-        const {handleSound} = this;
+        const {handleSound, handleRemove} = this;
         
         return (
             <div className={cx('result')}>
-                <button className={cx('addButton')} onClick={handleSound}>
+                <Button 
+                    className={cx('wordContainerButton')} 
+                    onClick={handleSound}
+                >
                     <IoMdVolumeHigh />
-                </button>
+                </Button>
+                <Button 
+                    className={cx('wordContainerButton')} 
+                    onClick={handleRemove}
+                >
+                    <MdDelete />
+                </Button>
             </div>
         )
     }

@@ -6,7 +6,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
+
+    margin-left: 0.3em;
+
+    transition-duration: 0.2s;
 
     background: $background;
     border: $border;
@@ -16,7 +19,7 @@
     font-size: 1.15rem;
 
     &:hover {
-        transform: translateY(-0.1rem); 
+        //transform: translateY(-0.1rem); 
         box-shadow : 0 0 10px 0px $hoverColor;
         cursor: pointer;
 
@@ -24,8 +27,8 @@
     
 }
 
-.addButton {
-    @include circleButton( 2rem, transparent, 2px solid $oc-red-5, $oc-red-5, $oc-red-3);
+.wordContainerButton {
+    @include circleButton( 1.5em, transparent, 1px solid $oc-red-5, $oc-red-5, $oc-red-3);
 }
 
 .button {

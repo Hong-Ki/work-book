@@ -5,7 +5,7 @@ import WordBox from './WordBox';
 class WordBoxList extends Component {
     
     render() {
-        const { words, search, mode, onEdit } = this.props;
+        const { words, search, mode, onEdit, onRemove } = this.props;
         const wordList = words.
                             map(
                                 word => (
@@ -14,6 +14,7 @@ class WordBoxList extends Component {
                                         word={word}
                                         mode={mode}
                                         onEdit={onEdit}
+                                        onRemove={onRemove}
                                     />
                                 )
                             )

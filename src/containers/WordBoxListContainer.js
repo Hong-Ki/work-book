@@ -26,21 +26,22 @@ class WordBoxListContainer extends Component {
         const {ModalActions, words} = this.props;
         const index = words.findIndex( word => word.get('id') === id );
         const word = new Word(words.get(index).toJS()).toModal();
-        //const word = words.get(index).set('means' ,
-        //    words.get(index).get('means').map( 
-        //        mean => Map({
-        //        mean : mean,
-        //        isEditMode : false
-        //})));
 
         ModalActions.show(word);
+    }
 
+    handleRemove = (id) => {
+        const {WordsActions, words} = this.props;
+        const index = words.findIndex( word => word.get('id') === id );
 
+        if ( index >= 0 ) {
+            WordsActions.remove(index);
+        }
     }
 
     render() {
         const {words, keyword, mode} = this.props;
-        const {handleEdit} = this;
+        const {handleEdit, handleRemove} = this;
 
         return (
             <WordBoxList
@@ -48,6 +49,7 @@ class WordBoxListContainer extends Component {
                 search={keyword}
                 mode={mode}
                 onEdit={handleEdit}
+                onRemove={handleRemove}
             />
         )
     }

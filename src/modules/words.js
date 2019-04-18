@@ -12,7 +12,7 @@ export const remove = createAction(REMOVE); // id
 export const loadWords = createAction(LOAD_WORDS); 
 
 const initialState = List([
-    /*Map({
+    Map({
         means : List(["T","E","S","T","1"]),
         word : "TEST_1",
         id : '1',
@@ -131,7 +131,7 @@ const initialState = List([
         word : "TEST_20",
         id : 20,
         isComplete : false
-    }),*/
+    })
 ]);
 
 export default handleActions({
@@ -148,7 +148,6 @@ export default handleActions({
     },
     [REMOVE] : (state, action) => {
         const index = state.findIndex( word => word.get('id') === action.payload );
-        
         return state.delete(index);
     },
     /*[SOUND] : (state, action) => {
