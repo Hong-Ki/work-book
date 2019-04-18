@@ -12,12 +12,12 @@ export const remove = createAction(REMOVE); // id
 export const loadWords = createAction(LOAD_WORDS); 
 
 const initialState = List([
-    Map({
+    /*Map({
         means : List(["T","E","S","T","1"]),
         word : "TEST_1",
         id : '1',
         isComplete : false
-    })/*,
+    }),
    Map({
         means : List(["T","E","S","T","2"]),
         word : "TEST_2",

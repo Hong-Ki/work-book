@@ -15,6 +15,13 @@ import Word from '../class/Word';
 import classNames from 'classnames/bind';
 
 class WordBoxListContainer extends Component {
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.words.toString() !== this.props.words.toString() ) {
+            localStorage.setItem('words', JSON.stringify(this.props.words));
+        }
+    }
+
     handleEdit = (id) => {
         const {ModalActions, words} = this.props;
         const index = words.findIndex( word => word.get('id') === id );

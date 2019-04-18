@@ -9,8 +9,11 @@ import WordBoxListContainer from './containers/WordBoxListContainer';
 import WordModalContainer from './containers/WordModalContainer';
 import FooterContainer from './containers/FooterContainer';
 
+import * as wordsActions from './modules/words';
+
 import * as layout from './style/layout.module.scss';
 import { connect } from 'react-redux'
+import {bindActionCreators} from 'redux';
 
 const cx = classNames.bind(layout);
 
@@ -20,9 +23,8 @@ class App extends Component {
 
     const words = localStorage.getItem('words');
     if ( words !== null && typeof (words) !== 'undefined' ) {
-      
-    } else {
-      
+      const {WordsActions} = this.props;
+      WordsActions.loadWords(JSON.parse(words));
     }
 
   }
@@ -47,5 +49,7 @@ class App extends Component {
 export default connect(
   (state) => ({
   }),
-  (dispatch) => ({})
+  (dispatch) => ({
+    WordsActions : bindActionCreators(wordsActions, dispatch)
+  })
 )(App);
