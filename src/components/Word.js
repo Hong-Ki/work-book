@@ -11,12 +11,11 @@ const cx = classNames.bind(styles);
 
 class Word extends Component {
     static propTypes = {
-        word : PropTypes.string,
-        id : PropTypes.string
+        word : PropTypes.string
     }
 
     render() {
-        const { word, id } = this.props;
+        const { word } = this.props;
 
         return (
             <div

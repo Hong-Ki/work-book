@@ -1,4 +1,4 @@
-@import '~open-color/open-color';
+@import './util.module.scss';
 
 @mixin modalButton ($background, $hoverColor, $color, $float) {
     background: $background;
@@ -88,9 +88,10 @@
         @include placeholder($oc-red-4);
         color: $oc-red-5;
         padding-left: 0.5em;
+        height: 1.6em;
+        width: 2em;
         border: 1px solid $oc-red-4;
         border-width: thin;
-        height: 30px;
         width :98%;
     }
     
@@ -144,12 +145,6 @@
             opacity: 0;
             transition: all .4s;
             color : $oc-red-4;
-
-            svg:hover {
-                cursor: pointer;
-                color: $oc-red-5;
-            }
-
         }
     }
 }
@@ -167,8 +162,6 @@
         color:$oc-red-5;
     }
 }
-
-
 
 .add { 
     @include modalButton( $oc-red-4, $oc-red-5 , white, left )

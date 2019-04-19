@@ -1,4 +1,5 @@
 import {Map, List, fromJS} from 'immutable';
+import shortid from 'shortid';
 
 const defaultWord = {
     means : [],
@@ -38,7 +39,7 @@ class Word {
                     .set('means', List(
                         this.means.map (
                             mean => Map(
-                                {mean:mean, isEditMod:false}
+                                { id:shortid.generate(), mean:mean, isEditMod:false}
                             )
                         )
                     ));

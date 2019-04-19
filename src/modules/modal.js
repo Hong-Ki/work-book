@@ -5,6 +5,7 @@ import {Record} from 'immutable';
 const SHOW = 'modal/SHOW';
 const HIDE = 'modal/HIDE';
 const CHANGE = 'modal/CHANGE';
+const TOGGLE_MEAN_MODE = 'modal/TOOGLE_MEAN_MODE';
 const ADD_MEAN = 'modal/ADD_MEAN';
 const REMOVE_MEAN = 'modal/REMOVE_MEAN';
 const CHANGE_MEAN = 'modal/CHANGE_MEAN';
@@ -12,7 +13,8 @@ const CHANGE_MEAN = 'modal/CHANGE_MEAN';
 export const show = createAction(SHOW);
 export const hide = createAction(HIDE);
 export const change = createAction(CHANGE); // {word, mean}
-export const addMean = createAction(ADD_MEAN); // mean
+export const toggleMeanMode = createAction(TOGGLE_MEAN_MODE); // index;
+export const addMean = createAction(ADD_MEAN); // Map{ mean:string, id:string, isEditMode:boolean }
 export const removeMean = createAction(REMOVE_MEAN); // index
 export const changeMean = createAction(CHANGE_MEAN); // input{ index, mean}
 
@@ -23,7 +25,7 @@ const initialState = Map ( {
     word: Map ( {
         id : null,
         word : '',
-        means: List([]), // means : [{mean:string, isEidtMode:boolean}]
+        means: List([]), // means : [{id:string, mean:string, isEidtMode:boolean}]
         wrongCounter : -1
     })
 });
@@ -40,7 +42,7 @@ export default handleActions ({
     },
     [HIDE]: (state, action) => {
         return state.set('visible', false).set('word', Map ( {
-            id : null,
+            id : '',
             word : '',
             means: List([]), // means : [{mean:string, isEidtMode:boolean}]
             wrongCounter : -1
@@ -55,14 +57,16 @@ export default handleActions ({
         }
 
     },
+    [TOGGLE_MEAN_MODE] : (state, action) => {
+        const index = action.payload;
+        const current = state.getIn(['word','means', index, 'isEditMode']);
+
+        return state.setIn(['word', 'means', index, 'isEditMode'], !current );
+    },
     [ADD_MEAN]: (state, action) => {
         const means = state.getIn(['word', 'means']);
-        const mean = Map ( {
-            mean : action.payload,
-            isEditMode : false
-        });
 
-        return state.setIn(['word','means'], means.push(mean));
+        return state.setIn(['word','means'], means.push(action.payload));
     },
     [REMOVE_MEAN]: (state, action) => {
         const means = state.getIn(['word', 'means']);
@@ -73,14 +77,8 @@ export default handleActions ({
     [CHANGE_MEAN]: (state, action) => {
         const means = state.getIn(['word', 'means']);
         const {index, mean} = action.payload;
-
-        if ( means.getIn([index, 'isEditMode']) ) {
-            //to Apply == now EditMode
-            return state.setIn(['word', 'means', index], Map ({isEditMode:false, mean:mean}) );
-        } else {
-            //to Edit
-            return state.setIn(['word', 'means', index, 'isEditMode'], true);
-        }
+        
+        return state.mergeIn(['word', 'means', index], Map ({isEditMode:false, mean:mean}) );
 
     }
 }, initialState);

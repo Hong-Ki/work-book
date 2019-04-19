@@ -16,44 +16,54 @@ import Modal from '../components/Modal'
 class WordModalContainer extends Component {
     handleMean = {
 
-        check: (mean) => {
-            const {modal} = this.props;
-            const index = modal.getIn(['word', 'means']).findIndex( value => value.get('mean') === mean);
-            
-            if (index < 0 || mean === '' || mean === null || typeof(mean) === 'undefined' ) {
-                return -1;
-            }
-
-            return index;
-        },
-
-        add : (mean) => {
+        add : ( mean ) => {
             const {ModalActions, modal } = this.props;
-            const isExist = this.handleMean.check(mean);
-
+            const index = modal.getIn( ['word', 'means'] ).findIndex( item => item.get('mean').replace(/ /g,'') === mean.replace(/ /g,'') );
+debugger;
             // 입력한 뜻이 존재 하지 않을 경우
-            if (isExist < 0 ) {
-                ModalActions.addMean( mean );
+            if (index < 0 ) {
+                const meanObj = Map({
+                    id : shortid.generate(),
+                    mean :mean,
+                    isEditMode : false
+                });
+                ModalActions.addMean( meanObj );
+            } else {
+                alert('exist');
             }
 
         },
 
-        remove : (idx) => {
+        remove : (id) => {
             const { ModalActions, modal }= this.props;
-            const index = Number(idx);
+            const index = modal.getIn( ['word', 'means'] ).findIndex( mean => mean.get('id') === id);
 
-            if (index < modal.getIn(['word','means']).size ){
-                
+            if (index >= 0 ){
                 ModalActions.removeMean(index);
             }
             
         },
 
-        change: (index, mean)=> {
+        change: (id, value)=> {
             const { ModalActions, modal }= this.props;
-            const means = modal.getIn( ['word', 'means'] );
- 
+            const index = modal.getIn( ['word', 'means'] ).findIndex( mean => mean.get('id') === id );
+            const otherMeans = modal.getIn(['word', 'means']).delete(index);
+
+            let mean = value;
+
+            if ( otherMeans.findIndex( mean => mean.get('mean').replace(/ /g,'') === value.replace(/ /g,'') ) > -1 ) {
+                alert('dup');
+                mean = modal.getIn(['word', 'means', index, 'mean']);
+            }
+
             ModalActions.changeMean( {index, mean} );
+        },
+        
+        toggleMode: (id) => {
+            const {ModalActions, modal} = this.props;
+            const index = modal.getIn( ['word', 'means'] ).findIndex( mean => mean.get('id') === id);
+
+            ModalActions.toggleMeanMode(index);
         }
 
     }
@@ -110,6 +120,7 @@ class WordModalContainer extends Component {
                                         modal={modal}
                                         mode={modal.get('mode')}
                                         onChange={handleChange}
+                                        toggleMeanMode={handleMean['toggleMode']}
                                         onAddMean={handleMean['add']}
                                         onChangeMean={handleMean['change']}
                                         onRemoveMean={handleMean['remove']}

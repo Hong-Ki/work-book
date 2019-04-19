@@ -4,17 +4,12 @@ import {Map, List} from 'immutable';
 import styles from '../style/modal.module.scss';
 import classNames from 'classnames/bind';
 
-//icon
-import {MdDelete, MdEdit} from 'react-icons/md';
+import Mean from './Mean';
+
 
 const cx = classNames.bind(styles);
 
 class MeanList extends Component {
-    constructor(props) {
-        super(props);
-        // create a ref to store the textInput DOM element
-        this.meanRef = React.createRef();
-      }
     
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.means.toString()
@@ -24,34 +19,13 @@ class MeanList extends Component {
 
         return true;
     }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.meanRef.current !== null) {
-            this.meanRef.current.focus();
-        }
-        
-    }
-    
-    handleChange = (e) => {
-        const index = Number(e.target.closest('div').getAttribute('index'));
-        const { onChangeMean } = this.props;
-        
-        onChangeMean( index );
-    }
     
     handleBlur = (e) => {
         const {value} = e.target;
-        const index = Number(e.target.getAttribute('index'));
         const {onChangeMean, means } = this.props;
-        const findIndex = means.findIndex(mean => mean.get('mean').trim() === value.trim() );
+        const findIndex = means.findIndex(mean => mean.get('mean').trim() === value.trim());
         let mean = value;
-        
-        if ( findIndex > -1 && index !== findIndex ) {
-            alert('이미 존재하는 값입니다.');
-            mean = means.getIn([index, 'mean']);
-        }
-        
-        onChangeMean( index, mean );
+        onChangeMean( findIndex, mean );
         
     }
     
@@ -69,45 +43,18 @@ class MeanList extends Component {
     }
     
     render() {
-        const { means } = this.props;
-        const { handleChange, handleRemove, handleBlur, handleKeyPress} = this;
-        let index = -1;
+        const { means, onRemove, toggleMode, onChange } = this.props;
+        const { handleRemove, handleBlur, handleKeyPress} = this;
+
         const meanList = means.map( 
-            mean => mean.get('isEditMode') ?
-            (
-                <div className={cx('mean')}
-                    key={++index}
-                >
-                    <div className={cx('text')} >
-                        <input 
-                            index={index} 
-                            ref={this.meanRef}
-                            defaultValue={mean.get('mean')}
-                            onBlur={handleBlur}
-                            onKeyPress={handleKeyPress}
-                        />
-                    </div>
-                    <MdEdit className={cx('submit')} />
-                </div>
-            ) 
-            : 
-            ( 
-                <div className={cx('mean')}
-                    key={++index}
-                >
-                    <div className={cx('text')}>{mean.get('mean')}</div>
-                    <div 
-                        className={cx('button')} 
-                        index={index}
-                    >
-                        <MdEdit 
-                            onClick={handleChange}
-                            />
-                        <MdDelete
-                            onClick={handleRemove}
-                        />
-                    </div>
-                </div>
+            mean => (
+                <Mean
+                    key={mean.get('id')}
+                    mean={mean}
+                    toggleMode={toggleMode}
+                    onChange={onChange}
+                    onRemove={onRemove}
+                />
             )
         );
 

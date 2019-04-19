@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 
 import classNames from 'classnames/bind';
-import style from '../style/index.module.scss';
+import buttonStyle from '../style/button.module.scss';
+import wordStyle from '../style/word.module.scss';
 
 import Button from './Button';
 
@@ -9,7 +10,8 @@ import Button from './Button';
 import {IoMdVolumeHigh} from 'react-icons/io';
 import {MdDelete} from 'react-icons/md';
 
-const cx = classNames.bind(style);
+const cx = classNames.bind(wordStyle);
+const cx2 = classNames.bind(buttonStyle);
 
 class Result extends Component {
     handleSound = (e) => {
@@ -31,19 +33,19 @@ class Result extends Component {
     }
 
     render() {
-        const {isComplete, onSound, id} = this.props;
+        const {isComplete, onSound} = this.props;
         const {handleSound, handleRemove} = this;
         
         return (
             <div className={cx('result')}>
                 <Button 
-                    className={cx('wordContainerButton')} 
+                    className={cx2('wordContainerButton')} 
                     onClick={handleSound}
                 >
                     <IoMdVolumeHigh />
                 </Button>
                 <Button 
-                    className={cx('wordContainerButton')} 
+                    className={cx2('wordContainerButton')} 
                     onClick={handleRemove}
                 >
                     <MdDelete />

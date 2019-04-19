@@ -1,8 +1,55 @@
 @import '~open-color/open-color';
 
+@mixin innerButton ($color, $hoverColor, $zIndex, $right, $left) {
+    position: absolute;
+    top :0%;
+    right :$right;
+    left :$left;
+    
+    color : $color;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    z-index: $zIndex;
+    
+    &:hover {
+        color: $hoverColor;
+        cursor: pointer;
+    }
+}
+
+@mixin modalButton ($background, $hoverColor, $color, $float) {
+    background: $background;
+    color: $color; 
+    transition-duration: .2s;
+    
+    float: $float;
+    height: 45px;
+    width: 50%;
+    margin: 3px 0px auto;
+    padding:0;
+    border-radius: 5px;
+    font-size: 20px;
+
+    display: flex;
+
+    &:hover {
+        background: $hoverColor;
+        cursor: pointer;
+    }
+
+    &>span {
+        margin:auto;  
+    }
+}
+
 @mixin circleButton ($size, $background, $border, $color, $hoverColor) {
     height: $size;
     width: $size;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,7 +62,7 @@
     border: $border;
     color: $color;
 
-    border-radius: 1rem;
+    border-radius: $size;
     font-size: 1.15rem;
 
     &:hover {
@@ -28,7 +75,8 @@
 }
 
 .wordContainerButton {
-    @include circleButton( 1.5em, transparent, 1px solid $oc-red-5, $oc-red-5, $oc-red-3);
+    @include circleButton( 1.3em, transparent, 1px solid $oc-red-5, $oc-red-5, $oc-red-3);
+    border-width: thin;
 }
 
 .button {
@@ -38,6 +86,30 @@
     margin: auto;
 
     &:hover {
-        color: red;
+        cursor: pointer;
+        color: $oc-red-5;
     }
+}
+
+.inputWrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;   
+    overflow : hidden;
+
+    & > input {
+        height: 100%; 
+        border: 0px;
+        &:focus + .innerButton-right {
+            opacity: 1;
+            right: 2%;
+        }
+    }
+}
+
+.innerButton-right{
+    transition-duration: 0.5s;
+    opacity: 0;
+    @include innerButton( $oc-red-4, $oc-red-5,12,-5%, auto );
+    
 }

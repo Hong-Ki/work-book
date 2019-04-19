@@ -19,9 +19,8 @@ class WordBox extends Component {
             means : ImmutablePropTypes.listOf(
                 PropTypes.string
             ),
-            word : PropTypes.string,
             id : PropTypes.string,
-            wrongCounter : PropTypes.number,
+            word : PropTypes.string,
             mode : PropTypes.string
         })
         // mode : PropTypes.string,
@@ -30,17 +29,14 @@ class WordBox extends Component {
     }
 
     handleEdit = (e) => {
-        const {onEdit} = this.props;
-        if ( e.target.tagName === 'DIV' || e.target.tagName === 'SPAN' ) {
-            
-            onEdit(e.target.closest('div').id);
-        }
+        const {onEdit, word} = this.props;
+        onEdit(word.get('id'));
     }
 
     render() {
-        const { word,mode, onEdit, onRemove } = this.props;
+        const { word,mode, onRemove } = this.props;
         const {handleEdit} = this;
-
+        
         return (
             <div className={cx('container')}
                 id={word.get('id')}
@@ -48,7 +44,6 @@ class WordBox extends Component {
             >
                 <Word 
                     word={word.get('word')} 
-                    id={word.get('id')}
                     />
                 <Means
                     means={word.get('means')}

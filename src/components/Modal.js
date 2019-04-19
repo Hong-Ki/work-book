@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 
-import WordBox from './WordBox';
-
 import classNames from 'classnames/bind';
 import styles from '../style/modal.module.scss';
 
+import Button from './Button';
+import {InputWithButton} from './Input';
 import MeanList from './MeanList';
+
+import {MdAdd} from 'react-icons/md';
 
 const cx = classNames.bind(styles);
 
@@ -24,7 +26,7 @@ class Modal extends Component {
         onAddMean( mean );
     }
 
-    handleKeyPress = (e) => {
+    handleKeyDown = (e) => {
         if ( (e.keyCode === 13 || e.keyCode === 9) && e.target.value !== '' ) {
             e.preventDefault();
             e.target.blur();
@@ -38,15 +40,15 @@ class Modal extends Component {
     }
 
     render() {
-        const { handleBlur, handleChange, handleKeyPress } = this;
-        const {modal, onChangeMean, onRemoveMean, onAdd, onCancel, mode} = this.props;
+        const { handleBlur, handleChange, handleKeyDown } = this;
+        const {modal, toggleMeanMode, onChangeMean, onRemoveMean, onAdd, onCancel, mode} = this.props;
 
         let modeString = '등록';
 
         if (mode === 'change') {
             modeString = '수정';
         }
-
+        const mdAdd = <MdAdd/>;
         return (
             <div className={cx('wrapper')}>
                 <div className={cx('box')}>
@@ -59,19 +61,23 @@ class Modal extends Component {
                                 placeholder='단어'
                                 defaultValue={modal.getIn(['word','word'])}
                                 onChange={handleChange}
-                                />
-                        <MeanList
-                            means = {modal.getIn(['word', 'means'])}
-                            onChangeMean = {onChangeMean}
-                            onRemoveMean = {onRemoveMean}
-                        />
-                        </div>
-                        <div>
-                            <input
+                                required='required'
+                            />
+                            <MeanList
+                                means = {modal.getIn(['word', 'means'])}
+                                onChange = {onChangeMean}
+                                onRemove = {onRemoveMean}
+                                toggleMode = {toggleMeanMode}
+                            />
+                            <InputWithButton
+                                className={'inputWrapper'}
+                                buttonClassName={'innerButton-right'}
                                 placeholder='Mean'
                                 onBlur={handleBlur}
-                                onKeyPress={handleKeyPress}
-                            />
+                                onKeyDown={handleKeyDown}
+                            >
+                                <MdAdd/>
+                            </InputWithButton>
                         </div>
                     </div>
                     <div 
