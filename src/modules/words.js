@@ -63,6 +63,7 @@ export default handleActions({
     },
     [REMOVE] : (state, action) => {
         const index = state.findIndex( word => word.get('id') === action.payload );
+        debugger;
         return state.delete(index);
     },
     [LOAD_WORDS] : (state, action) => {

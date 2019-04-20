@@ -15,20 +15,21 @@ const cx2 = classNames.bind(buttonStyle);
 
 class Result extends Component {
     handleSound = (e) => {
+        e.stopPropagation();
         const { word } = this.props;
-        // const index = state.findIndex( word => word.get('id') === action.payload );
         let msg = new SpeechSynthesisUtterance(word);
         msg.lang='en-us';
         msg.volume=1;
         msg.rate=1;
         msg.pitch=1;
-
+        
         speechSynthesis.speak(msg);
     }
-
+    
     handleRemove = (e) => {
+        e.stopPropagation();
         const {id, onRemove} =this.props;
-
+        
         onRemove(id);
     }
 
