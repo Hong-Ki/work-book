@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import WordBox from './WordBox';
 
 class WordBoxList extends Component {
-    
+
     render() {
         const { words, mode, onEdit, onRemove } = this.props;
         const wordList = words.
@@ -20,7 +20,8 @@ class WordBoxList extends Component {
                             )
 
         return (
-            <div>
+            <div
+            >
                 {wordList}
             </div>
         )

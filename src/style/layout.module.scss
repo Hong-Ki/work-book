@@ -35,6 +35,8 @@ html, body, body>div{
 
 .footer {
     @include bar(7vh, $oc-red-4);
+
+    margin-top:auto;
     &:hover {
         background: $oc-red-5;
         cursor: pointer;

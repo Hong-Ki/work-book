@@ -1,5 +1,17 @@
 @import '~open-color/open-color';
 
+@keyframes show {
+    from {
+        opacity: 0;
+        transform: scaleY(0.99) scaleX(1.01);
+    }
+    
+    to {
+        opacity: 1;
+        transform: scaleY(1) scaleX(1);
+    }
+}
+
 .container {
     width : 96%;
     border-radius: 1rem;
@@ -7,7 +19,7 @@
     margin: 15px auto;
     vertical-align: middle;
     display: flex;
-    transition: all 0.2s ease-out;
+    animation: show 0.8s;
 
     &:hover {
         box-shadow: none;
@@ -16,9 +28,7 @@
             cursor: pointer;
         }
     }
-    
 }
-
 
 @mixin contents ($width, $radius) {
     transition: all 0.2s ease-out;

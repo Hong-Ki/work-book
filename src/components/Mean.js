@@ -13,6 +13,18 @@ const cx = classNames.bind(styles);
 
 
 class Mean extends Component {
+    constructor(props) {
+        super(props);
+
+        this.ref = React.createRef();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.ref.current !== null) {
+            this.ref.current.focus();
+        }
+
+    }
 
     handleMode = () => {
         const {mean, toggleMode} = this.props;
@@ -40,6 +52,7 @@ class Mean extends Component {
                                 defaultValue={mean.get('mean')}
                                 buttonClassName={'innerButton-right'}
                                 onBlur={handleChange}
+                                ref={this.ref}
                             >
                                 <MdEdit/>
                             </InputWithButton>

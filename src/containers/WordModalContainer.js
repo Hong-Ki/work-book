@@ -19,7 +19,6 @@ class WordModalContainer extends Component {
         add : ( mean ) => {
             const {ModalActions, modal } = this.props;
             const index = modal.getIn( ['word', 'means'] ).findIndex( item => item.get('mean').replace(/ /g,'') === mean.replace(/ /g,'') );
-debugger;
             // 입력한 뜻이 존재 하지 않을 경우
             if (index < 0 ) {
                 const meanObj = Map({
@@ -77,7 +76,7 @@ debugger;
                 isComplete : false,
                 id : shortid.generate()
             });
-
+            
             WordsActions.create(word);
             ModalActions.hide();
         },

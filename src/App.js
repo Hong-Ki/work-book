@@ -18,6 +18,7 @@ import {bindActionCreators} from 'redux';
 const cx = classNames.bind(layout);
 
 class App extends Component {
+  
 
   componentDidMount() {
 
@@ -30,6 +31,8 @@ class App extends Component {
   }
 
   render() {
+
+    const {handleClick} = this;
     return (
       <div className={cx('wrapper')}>
         <Header/>

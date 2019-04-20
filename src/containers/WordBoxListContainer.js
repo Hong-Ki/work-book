@@ -15,6 +15,7 @@ import Word from '../class/Word';
 import classNames from 'classnames/bind';
 
 class WordBoxListContainer extends Component {
+    
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.words.toString() !== this.props.words.toString() ) {

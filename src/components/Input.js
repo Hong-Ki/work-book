@@ -18,25 +18,25 @@ const Input = ({children, ...rest}) => {
     );
 }
         
-const InputWithButton = ({children, ...rest}) => {
-    return (
-        <div className={cx('inputWrapper')}>
+const InputWithButton = React.forwardRef( (props,ref) => (
+    <div className={cx('inputWrapper')}>
             <input
-                placeholder={rest.placeholder}
-                defaultValue={rest.defaultValue}
-                onKeyDown={rest.onKeyDown}
-                onChange={rest.onChange}
-                onBlur={rest.onBlur}
+                ref={ref}
+                placeholder={props.placeholder}
+                defaultValue={props.defaultValue}
+                onKeyDown={props.onKeyDown}
+                onChange={props.onChange}
+                onBlur={props.onBlur}
             />
             <Button
-                className={cx(rest.buttonClassName)}
-                placeholder={rest.placeholder}
-                onClick={rest.onClick}
+                className={cx(props.buttonClassName)}
+                placeholder={props.placeholder}
+                onClick={props.onClick}
             >
-                {children}
+                {props.children}
             </Button>
         </div>
-    );
-}
+));
+
 
 export {Input, InputWithButton};

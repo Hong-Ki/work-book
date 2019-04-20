@@ -36,7 +36,6 @@ class WordBox extends Component {
     render() {
         const { word,mode, onRemove } = this.props;
         const {handleEdit} = this;
-        
         return (
             <div className={cx('container')}
                 id={word.get('id')}
