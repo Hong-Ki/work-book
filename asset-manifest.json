@@ -1,13 +1,13 @@
 {
-  "main.css": "/word-book/static/css/main.7e868907.chunk.css",
-  "main.js": "/word-book/static/js/main.e7eb5541.chunk.js",
-  "main.js.map": "/word-book/static/js/main.e7eb5541.chunk.js.map",
+  "main.css": "/word-book/static/css/main.a94b2552.chunk.css",
+  "main.js": "/word-book/static/js/main.8e3a0cd2.chunk.js",
+  "main.js.map": "/word-book/static/js/main.8e3a0cd2.chunk.js.map",
   "runtime~main.js": "/word-book/static/js/runtime~main.8516e3df.js",
   "runtime~main.js.map": "/word-book/static/js/runtime~main.8516e3df.js.map",
-  "static/js/2.8db1c868.chunk.js": "/word-book/static/js/2.8db1c868.chunk.js",
-  "static/js/2.8db1c868.chunk.js.map": "/word-book/static/js/2.8db1c868.chunk.js.map",
+  "static/js/2.5beaf6f9.chunk.js": "/word-book/static/js/2.5beaf6f9.chunk.js",
+  "static/js/2.5beaf6f9.chunk.js.map": "/word-book/static/js/2.5beaf6f9.chunk.js.map",
   "index.html": "/word-book/index.html",
-  "precache-manifest.fdcc4c8ac1daf9248eb7ebfcc544726b.js": "/word-book/precache-manifest.fdcc4c8ac1daf9248eb7ebfcc544726b.js",
+  "precache-manifest.a2551bcb2067d889b731fc154b0b5ac7.js": "/word-book/precache-manifest.a2551bcb2067d889b731fc154b0b5ac7.js",
   "service-worker.js": "/word-book/service-worker.js",
-  "static/css/main.7e868907.chunk.css.map": "/word-book/static/css/main.7e868907.chunk.css.map"
+  "static/css/main.a94b2552.chunk.css.map": "/word-book/static/css/main.a94b2552.chunk.css.map"
 }
