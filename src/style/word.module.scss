@@ -34,10 +34,9 @@
     transition: all 0.2s ease-out;
     height: 100%;
     display: flex;
-    width: $width;
+    width: $width * 1vw;
     border-radius: $radius;
     color : $oc-red-5;
-    //border: 2px solid $oc-red-5;
     box-shadow: 1px 1px 7px 0px $oc-red-2;
     align-items: center;
     justify-content: center;
@@ -46,15 +45,53 @@
     font-weight: 400;        
 }
 
-.word {
-    @include contents(25%, 1em 0 0 1em );
+.check {
+    @include contents(10, 1em 0 0 1em);
+
+    &>input {
+        display: none;
+    }
+
+    &>label {
+        width: 1.3em;
+        height: 1.3em;
+
+        display: flex;
+
+        & svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    
+    &>input[type='checkbox'] + label>svg:nth-child(1) {
+        display: flex;
+        cursor: pointer;
+    }
+    &>input[type='checkbox'] + label>svg:nth-child(2) {
+        display: none;
+        cursor: pointer;
+    }
+    
+    &>input[type='checkbox']:checked + label>svg:nth-child(1) {
+        display: none;
+        cursor: pointer;
+        
+    }
+    &>input[type='checkbox']:checked + label>svg:nth-child(2) {
+        display: flex;
+        cursor: pointer;
+    }
 
     border-right: 0px;
 }
+.word {
+    @include contents(17, auto );
+}
 .mean {
-    @include contents(60%, auto );
+    @include contents(60, auto );
 }
 .result {
-    @include contents(15%, 0 1em 1em 0 );
+    @include contents(13, 0 1em 1em 0 );
     border-left: 0px;
 }

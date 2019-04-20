@@ -6,9 +6,9 @@ const UPDATE = 'word/UPDATE';
 const REMOVE = 'word/REMOVE';
 const LOAD_WORDS = 'word/LOAD_WORDS';
 
-export const create = createAction(CREATE); // Map{id, word, means[], isComplete, wrongCount }
-export const update = createAction(UPDATE); // id, word{ word, means[], isComplete, wrongCount } 
-export const remove = createAction(REMOVE); // id
+export const create = createAction(CREATE); // Map{id, word, List[means], isComplete, wrongCount }
+export const update = createAction(UPDATE); // id, word{ word, List[means], isComplete, wrongCount } 
+export const remove = createAction(REMOVE); // List[id]
 export const loadWords = createAction(LOAD_WORDS); 
 
 const initialState = List([
@@ -36,8 +36,8 @@ export default handleActions({
                 let idx = editMeans.findIndex( mean => mean.replace(/ /g,'') === means[key].replace(/ /g,'') );
                 if (idx > -1) {
                     means[key] = editMeans[idx];
+                    editMeans.splice(idx, 1);
                 }
-                editMeans.splice(idx, 1);
             }
 
             return state.setIn([index,'means'], List(means.concat(editMeans)));
@@ -62,9 +62,12 @@ export default handleActions({
 
     },
     [REMOVE] : (state, action) => {
-        const index = state.findIndex( word => word.get('id') === action.payload );
-        debugger;
-        return state.delete(index);
+        const result = state.filter (
+            word => action.payload.findIndex( id => word.get('id') === id ) <0
+        );
+
+        return result;
+
     },
     [LOAD_WORDS] : (state, action) => {
         return fromJS(action.payload);

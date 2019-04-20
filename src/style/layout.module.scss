@@ -36,9 +36,32 @@ html, body, body>div{
 .footer {
     @include bar(7vh, $oc-red-4);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
     margin-top:auto;
-    &:hover {
-        background: $oc-red-5;
+    
+    &>div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        height: 100%;
         cursor: pointer;
     }
+
+    &>div:nth-child(1) {
+        &:hover{
+            background: $oc-red-5;
+        }
+    }
+    
+    &>div:nth-child(2) {
+        background: $oc-gray-5;
+        &:hover{
+            background: $oc-gray-6;
+        }
+    }
+
 }

@@ -76,7 +76,7 @@ class WordModalContainer extends Component {
                 isComplete : false,
                 id : shortid.generate()
             });
-            
+
             WordsActions.create(word);
             ModalActions.hide();
         },
@@ -110,7 +110,6 @@ class WordModalContainer extends Component {
     render () {
         const {handleMean, handleChange, handleWord, handleCancel} = this;
         const {modal} = this.props;
-
         return (
             <div>
                 {

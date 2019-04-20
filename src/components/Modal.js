@@ -43,22 +43,22 @@ class Modal extends Component {
         const { handleBlur, handleChange, handleKeyDown } = this;
         const {modal, toggleMeanMode, onChangeMean, onRemoveMean, onAdd, onCancel, mode} = this.props;
 
-        let modeString = '등록';
+        let modeString = 'Add';
 
         if (mode === 'change') {
-            modeString = '수정';
+            modeString = 'Edit';
         }
         const mdAdd = <MdAdd/>;
         return (
             <div className={cx('wrapper')}>
                 <div className={cx('box')}>
                     <div className={cx('title')}> 
-                        <p>단어 {modeString}</p>
+                        <p>Word {modeString}</p>
                     </div>
                     <div className={cx('contents')}>
                         <div>
                             <input
-                                placeholder='단어'
+                                placeholder='Word'
                                 defaultValue={modal.getIn(['word','word'])}
                                 onChange={handleChange}
                                 required='required'
@@ -90,7 +90,7 @@ class Modal extends Component {
                         className={cx('cancel')}
                         onClick={onCancel}
                     >
-                        <span>취소</span>
+                        <span>Cancel</span>
                     </div>
                 </div>
             </div>

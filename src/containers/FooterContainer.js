@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames/bind';
-import {MdAdd} from 'react-icons/md';
+import {MdAdd, MdRemove} from 'react-icons/md';
 import {Map, List} from 'immutable';
 
 import * as modalActions from '../modules/modal'
+import * as wordsActions from '../modules/words'
 import * as styles from '../style/layout.module.scss'
 
 import Button from '../components/Button';
@@ -20,16 +21,38 @@ class FooterContainer extends Component {
         ModalActions.show();
     }
 
+    handleRemove = () => {
+        const {WordsActions} = this.props;
+        const idList = List(document.querySelectorAll('input[type="checkbox"]:checked'))
+                            .map(element => element.id);
+                            
+        if ( idList.isEmpty() ) {
+            window.alert('Please select more than one!');
+            return;
+        }
+
+        if ( window.confirm('do you want remove?')) {
+            WordsActions.remove(idList);
+        }
+        
+    }
+
     render () {
-        const {handleShow} = this;
+        const {handleShow, handleRemove} = this;
 
         return (
             <div 
                 className={cx('footer')}
-                onClick={handleShow}
             >
-                <Button>
+                <Button
+                    onClick={handleShow}
+                >
                     <MdAdd/>
+                </Button>
+                <Button
+                    onClick={handleRemove}
+                >
+                    <MdRemove/>
                 </Button>
             </div>
         )
@@ -39,6 +62,7 @@ class FooterContainer extends Component {
 export default connect(
     null,
     (dispatch) => ({
-        ModalActions : bindActionCreators(modalActions, dispatch)
+        ModalActions : bindActionCreators(modalActions, dispatch),
+        WordsActions : bindActionCreators(wordsActions, dispatch)
     })
 ) (FooterContainer);

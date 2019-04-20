@@ -32,12 +32,9 @@ class WordBoxListContainer extends Component {
     }
 
     handleRemove = (id) => {
-        const {WordsActions, words} = this.props;
-        const index = words.findIndex( word => word.get('id') === id );
-        debugger;
-        if ( index >= 0 ) {
-            WordsActions.remove(id);
-        }
+        const {WordsActions} = this.props;
+
+        WordsActions.remove(id);
     }
 
     render() {

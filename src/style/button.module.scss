@@ -85,6 +85,9 @@
     justify-content: center;
     margin: auto;
 
+    width: 100%;
+    height: 100%;
+
     &:hover {
         cursor: pointer;
         color: $oc-red-5;
@@ -111,5 +114,4 @@
     transition-duration: 0.5s;
     opacity: 0;
     @include innerButton( $oc-red-4, $oc-red-5,12,-5%, auto );
-    
 }

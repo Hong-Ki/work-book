@@ -26,13 +26,6 @@ class Result extends Component {
         speechSynthesis.speak(msg);
     }
     
-    handleRemove = (e) => {
-        e.stopPropagation();
-        const {id, onRemove} =this.props;
-        
-        onRemove(id);
-    }
-
     render() {
         const {isComplete, onSound} = this.props;
         const {handleSound, handleRemove} = this;
@@ -40,16 +33,10 @@ class Result extends Component {
         return (
             <div className={cx('result')}>
                 <Button 
-                    className={cx2('wordContainerButton')} 
+                    className={'wordContainerButton'} 
                     onClick={handleSound}
                 >
                     <IoMdVolumeHigh />
-                </Button>
-                <Button 
-                    className={cx2('wordContainerButton')} 
-                    onClick={handleRemove}
-                >
-                    <MdDelete />
                 </Button>
             </div>
         )
