@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import classNames from 'classnames/bind';
 import styles from '../style/modal.module.scss';
 
-import Button from './Button';
 import {InputWithButton} from './Input';
 import MeanList from './MeanList';
 
@@ -48,7 +47,7 @@ class Modal extends Component {
         if (mode === 'change') {
             modeString = 'Edit';
         }
-        const mdAdd = <MdAdd/>;
+
         return (
             <div className={cx('wrapper')}>
                 <div className={cx('box')}>

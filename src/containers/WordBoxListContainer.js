@@ -8,6 +8,7 @@ import {bindActionCreators} from 'redux';
 import * as wordsActions from '../modules/words';
 import * as testActions from '../modules/test';
 import * as modalActions from '../modules/modal';
+import * as baseActions from '../modules/base';
 
 import WordBoxList from '../components/WordBoxList';
 import Word from '../class/Word';
@@ -37,33 +38,39 @@ class WordBoxListContainer extends Component {
         WordsActions.remove(id);
     }
 
+    handleSearch = (keyword) => {
+        const {BaseActions} =this.props;
+
+        BaseActions.search(keyword);
+    }
+
     render() {
         const {words, keyword, mode} = this.props;
-        const {handleEdit, handleRemove} = this;
+        const {handleEdit, handleRemove, handleSearch} = this;
 
         return (
             <WordBoxList
                 words={words}
-                search={keyword}
+                keyword={keyword}
                 mode={mode}
                 onEdit={handleEdit}
                 onRemove={handleRemove}
+                onSearch={handleSearch}
             />
         )
     }
 }
 
 export default connect(
-
     (state) => ({
-        keyword: '',
-        //keyword: state.get('keyword'),
+        keyword: state.base.get('keyword'),
         words : state.words,
-        mode : ''
+        mode : state.base.get('mode')
     }),
     (dispatch) => ({
         WordsActions: bindActionCreators(wordsActions, dispatch),
         ModalActions: bindActionCreators(modalActions, dispatch),
+        BaseActions: bindActionCreators(baseActions, dispatch),
         TestActions: bindActionCreators(testActions, dispatch)
     })
 ) (WordBoxListContainer);

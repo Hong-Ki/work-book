@@ -14,6 +14,21 @@ class Word extends Component {
         word : PropTypes.string
     }
 
+    constructor(props) {
+        super(props);
+
+        this.ref = React.createRef();
+    }
+
+    componentDidMount(prevProps, prevState, snapshot) {
+        const current = this.ref.current;
+        
+        if (current.offsetWidth > current.parentElement.offsetWidth ) {
+            current.className = cx('overflowText');
+        }
+
+    }
+
     render() {
         const { word } = this.props;
 
@@ -21,7 +36,11 @@ class Word extends Component {
             <div
                 className={cx('word')}
             >
-                {word}
+                <span
+                    ref={this.ref}
+                >
+                    {word}
+                </span>
             </div>
         )
     }

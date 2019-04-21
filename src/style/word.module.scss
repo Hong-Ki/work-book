@@ -12,14 +12,26 @@
     }
 }
 
+@keyframes text-move {
+    from {
+        transform : translateX(50%)
+    }
+    
+    to {
+        transform : translateX(-50%)
+      }
+}
+
 .container {
     width : 96%;
     border-radius: 1rem;
     height: 3rem;
     margin: 15px auto;
-    vertical-align: middle;
     display: flex;
     animation: show 0.8s;
+
+    align-items: center;
+    justify-content: center;
 
     &:hover {
         box-shadow: none;
@@ -40,9 +52,20 @@
     box-shadow: 1px 1px 7px 0px $oc-red-2;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+
+    &>span {
+        position: relative;
+        white-space: nowrap;
+    }
     
     font-size: 1.1em;
     font-weight: 400;        
+}
+
+.overflowText {
+    
+    animation: text-move 15s infinite linear;
 }
 
 .check {

@@ -109,7 +109,8 @@ class WordModalContainer extends Component {
 
     render () {
         const {handleMean, handleChange, handleWord, handleCancel} = this;
-        const {modal} = this.props;
+        const {modal, words} = this.props;
+
         return (
             <div>
                 {

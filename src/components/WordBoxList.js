@@ -3,20 +3,31 @@ import React, {Component} from 'react';
 import WordBox from './WordBox';
 
 class WordBoxList extends Component {
+    handleChange = (e) => {
+        const {onSearch} = this.props;
+        const {value} = e.target;
+
+        onSearch(value);
+    }
 
     render() {
-        const { words, mode, onEdit, onRemove } = this.props;
+        const { words, mode, onEdit, onRemove, keyword } = this.props;
+        const {handleChange} = this;
         const wordList = words.
-                            map(
-                                word => (
+                            filter(
+                                word => word.get('means').filter( mean => mean.indexOf(keyword) !== -1 ).size > 0
+                                        || word.get('word').indexOf(keyword) !== -1
+                            )
+                            .map (
+                                word => 
                                     <WordBox
                                         key={word.get('id')}
+                                        keyword={keyword}
                                         word={word}
                                         mode={mode}
                                         onEdit={onEdit}
                                         onRemove={onRemove}
                                     />
-                                )
                             )
 
         return (

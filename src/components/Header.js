@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 
 const Header = () => (
-    <div className={cx('header')}> 단어장 </div>
+    <div className={cx('header')}> Word Book </div>
 );
 
 export default Header;

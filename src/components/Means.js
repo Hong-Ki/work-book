@@ -13,6 +13,21 @@ import TestForm from './TestForm';
 const cx = classNames.bind(styles);
 
 class Means extends Component {
+    constructor(props) {
+        super(props);
+
+        this.ref = React.createRef();
+    }
+
+    componentDidMount(prevProps, prevState, snapshot) {
+        const current = this.ref.current;
+        
+        if (current.offsetWidth > current.parentElement.offsetWidth ) {
+            current.className = cx('overflowText');
+        }
+
+    }
+
     static propTypes = {
         means : ImmutablePropTypes.listOf(
             PropTypes.string
@@ -46,7 +61,11 @@ class Means extends Component {
                 onClick={onEdit}
                 className={cx('mean')}
             >
-                {contents}
+                <span
+                    ref={this.ref}
+                >
+                    {contents}
+                </span>
             </div>
         )
     }

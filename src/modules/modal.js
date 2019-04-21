@@ -1,6 +1,5 @@
 import {Map,List} from  'immutable';
 import {createAction, handleActions} from  'redux-actions';
-import {Record} from 'immutable';
 
 const SHOW = 'modal/SHOW';
 const HIDE = 'modal/HIDE';
