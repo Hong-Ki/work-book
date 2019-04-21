@@ -28,7 +28,8 @@ class Word {
     }
 
     fromModal = () => {
-        this.means = this.means.map( mean => mean.mean );
+        debugger;
+        this.means = this.means.map( mean => mean.get('mean') );
 
         return this;
     }
@@ -47,6 +48,7 @@ class Word {
     }
 
     toImmutable = () => {
+        debugger;
         return Map({
             means : List(this.means),
             word : this.word,

@@ -23,7 +23,7 @@ const initialState = List([
 export default handleActions({
     [CREATE] : (state, action) => {
         const index = state.findIndex( word => word.get('word') === action.payload.get('word') );
-
+debugger;
         if ( index < 0) {
             return state.push( action.payload );
         }

@@ -28,7 +28,7 @@ class WordModalContainer extends Component {
                 });
                 ModalActions.addMean( meanObj );
             } else {
-                alert('exist');
+                alert('it is duplicate');
             }
 
         },
@@ -51,8 +51,15 @@ class WordModalContainer extends Component {
             let mean = value;
 
             if ( otherMeans.findIndex( mean => mean.get('mean').replace(/ /g,'') === value.replace(/ /g,'') ) > -1 ) {
-                alert('dup');
+                alert('it is duplicate');
                 mean = modal.getIn(['word', 'means', index, 'mean']);
+            }
+
+            if (value === '' ) {
+                if ( window.confirm("you didn't enter anything. do you want remove this?") ) {
+                    ModalActions.removeMean(index);
+                }
+                return;
             }
 
             ModalActions.changeMean( {index, mean} );
@@ -70,21 +77,65 @@ class WordModalContainer extends Component {
     handleWord = {
         add: () => {
             const {WordsActions, ModalActions, modal} = this.props;
-            const word = Map({
-                word : modal.getIn(['word', 'word']),
-                means : modal.getIn(['word', 'means']).map(mean => mean.get('mean')),
-                isComplete : false,
-                id : shortid.generate()
-            });
+            const word = modal.getIn(['word', 'word']);
+            const means = modal.getIn(['word', 'means']);
 
-            WordsActions.create(word);
+            let msg = 'Please enter this:';
+            let validate = true;
+            if (word === '' ) {
+                validate = false;
+                msg += '\n-Word'; 
+            } 
+            
+            if ( means.isEmpty() ) {
+                validate = false;
+                msg += '\n-Means';
+            }
+
+            if ( !validate ) {
+                window.alert(msg);
+                return;
+            }
+
+            WordsActions.create( 
+                new Word (
+                    {
+                        word:word,
+                        means:means,
+                        id:shortid.generate()
+                    }
+                ).fromModal().toImmutable()
+            );
             ModalActions.hide();
         },
         change: () => {
             const {WordsActions, ModalActions, modal} =this.props;
-            const word = new Word( modal.get('word').toJS() ).fromModal();
+
+            const word = modal.getIn(['word', 'word']);
+            const means = modal.getIn(['word', 'means']);
+
+            let msg = 'Please enter this:';
+            let validate = true;
+            if (word === '' ) {
+                validate = false;
+                msg += '\n-Word'; 
+            } 
             
-            WordsActions.update(word);
+            if ( means.isEmpty() ) {
+                validate = false;
+                msg += '\n-Means';
+            }
+
+            if ( !validate ) {
+                window.alert(msg);
+                return;
+            }
+            
+            WordsActions.update(
+                new Word( 
+                    modal.get('word').toJS() 
+                ).fromModal()
+            );
             ModalActions.hide();
         }
     }
