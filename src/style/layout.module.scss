@@ -96,4 +96,8 @@ html, body, body>div{
         }
     }
 
+    &>input {
+        display: none;
+    }
+
 }

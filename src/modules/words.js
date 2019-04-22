@@ -23,12 +23,12 @@ const initialState = List([
 export default handleActions({
     [CREATE] : (state, action) => {
         const index = state.findIndex( word => word.get('word') === action.payload.get('word') );
-debugger;
+
         if ( index < 0) {
             return state.push( action.payload );
         }
 
-        if ( window.confirm('Do you want Merge?') ) {
+        if ( window.confirm( state.getIn([index,'word'])+' : Do you want Merge?') ) {
             let means = state.getIn([index, 'means']).toJS();
             const editMeans = action.payload.get('means').toJS();
 

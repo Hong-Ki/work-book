@@ -4,12 +4,12 @@ import shortid from 'shortid';
 const defaultWord = {
     means : [],
     word : '',
-    id : '',
     isComplete : false
 };
 
 class Word {
     constructor( word ) {
+        this.id = shortid.generate();
         for ( let key in defaultWord ) {
             this[key] = word[key] || defaultWord[key];
         }
@@ -28,7 +28,6 @@ class Word {
     }
 
     fromModal = () => {
-        debugger;
         this.means = this.means.map( mean => mean.get('mean') );
 
         return this;
@@ -48,7 +47,6 @@ class Word {
     }
 
     toImmutable = () => {
-        debugger;
         return Map({
             means : List(this.means),
             word : this.word,
