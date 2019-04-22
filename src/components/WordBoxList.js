@@ -3,12 +3,6 @@ import React, {Component} from 'react';
 import WordBox from './WordBox';
 
 class WordBoxList extends Component {
-    handleChange = (e) => {
-        const {onSearch} = this.props;
-        const {value} = e.target;
-
-        onSearch(value);
-    }
 
     render() {
         const { words, mode, onEdit, onRemove, keyword } = this.props;

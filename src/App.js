@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import Header from './components/Header';
 
 //containers
+import HeaderContainer from './containers/HeaderContainer';
 import WordBoxListContainer from './containers/WordBoxListContainer';
 import WordModalContainer from './containers/WordModalContainer';
 import FooterContainer from './containers/FooterContainer';
@@ -35,7 +36,7 @@ class App extends Component {
     const {handleClick} = this;
     return (
       <div className={cx('wrapper')}>
-        <Header/>
+        <HeaderContainer/>
         
         <div className={cx('body')}>
           <WordBoxListContainer />

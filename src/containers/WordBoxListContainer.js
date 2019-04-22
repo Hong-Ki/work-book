@@ -38,15 +38,9 @@ class WordBoxListContainer extends Component {
         WordsActions.remove(id);
     }
 
-    handleSearch = (keyword) => {
-        const {BaseActions} =this.props;
-
-        BaseActions.search(keyword);
-    }
-
     render() {
         const {words, keyword, mode} = this.props;
-        const {handleEdit, handleRemove, handleSearch} = this;
+        const {handleEdit, handleRemove} = this;
 
         return (
             <WordBoxList
@@ -55,7 +49,6 @@ class WordBoxListContainer extends Component {
                 mode={mode}
                 onEdit={handleEdit}
                 onRemove={handleRemove}
-                onSearch={handleSearch}
             />
         )
     }

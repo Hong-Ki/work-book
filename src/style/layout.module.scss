@@ -13,8 +13,40 @@
     justify-content: center; /* 가로 정렬 */
 }
 
+@mixin placeholder($color) {
+    &::placeholder {
+        color: $color;
+        opacity: 1;
+    }
+    
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: $color;
+    }
+    
+    &::-ms-input-placeholder { /* Microsoft Edge */
+        color: $color;
+    }
+}
+
 .header {
     @include bar(8vh, $oc-red-5);
+
+    & input {
+        color: $oc-red-5;
+        padding-left: 0.5em;
+        @include placeholder($oc-red-4);
+    }
+
+    &>span{
+        text-align: center;
+        flex-grow: 100;
+    }
+
+    &>div {
+        height: 35px;
+        flex-grow: 1;
+        padding-right: 1.5em;
+    }
 }
 
 html, body, body>div{

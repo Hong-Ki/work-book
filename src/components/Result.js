@@ -8,10 +8,8 @@ import Button from './Button';
 
 //icons
 import {IoMdVolumeHigh} from 'react-icons/io';
-import {MdDelete} from 'react-icons/md';
 
 const cx = classNames.bind(wordStyle);
-const cx2 = classNames.bind(buttonStyle);
 
 class Result extends Component {
     handleSound = (e) => {
