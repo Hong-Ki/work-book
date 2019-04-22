@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {Map, List} from 'immutable';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -12,8 +9,6 @@ import * as baseActions from '../modules/base';
 
 import WordBoxList from '../components/WordBoxList';
 import Word from '../class/Word';
-
-import classNames from 'classnames/bind';
 
 class WordBoxListContainer extends Component {
     

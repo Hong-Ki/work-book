@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 
-//components
-import Header from './components/Header';
-
 //containers
 import HeaderContainer from './containers/HeaderContainer';
 import WordBoxListContainer from './containers/WordBoxListContainer';
@@ -32,8 +29,6 @@ class App extends Component {
   }
 
   render() {
-
-    const {handleClick} = this;
     return (
       <div className={cx('wrapper')}>
         <HeaderContainer/>

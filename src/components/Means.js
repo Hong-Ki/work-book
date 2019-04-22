@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Map} from 'immutable';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 

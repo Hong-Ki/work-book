@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames/bind';
 import {MdAdd, MdRemove} from 'react-icons/md';
-import {Map, List} from 'immutable';
+import {List} from 'immutable';
 
 import * as modalActions from '../modules/modal'
 import * as wordsActions from '../modules/words'

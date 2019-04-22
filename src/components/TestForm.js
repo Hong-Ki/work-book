@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {List} from 'immutable';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 //Component
 //import Input from './Input';
@@ -16,7 +13,7 @@ class TestForm extends Component {
     }
 
     render() {
-        const { keyword, means, onTest } = this.props;
+        const { keyword, onTest } = this.props;
 
         const {handleChange} = this;
 

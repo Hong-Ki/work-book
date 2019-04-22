@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import classNames from 'classnames/bind';
-import buttonStyle from '../style/button.module.scss';
 import wordStyle from '../style/word.module.scss';
 
 import Button from './Button';
@@ -11,7 +10,7 @@ import {IoMdVolumeHigh} from 'react-icons/io';
 
 const cx = classNames.bind(wordStyle);
 
-class Result extends Component {
+class Etc extends Component {
     handleSound = (e) => {
         e.stopPropagation();
         const { word } = this.props;
@@ -25,11 +24,10 @@ class Result extends Component {
     }
     
     render() {
-        const {isComplete, onSound} = this.props;
-        const {handleSound, handleRemove} = this;
+        const {handleSound} = this;
         
         return (
-            <div className={cx('result')}>
+            <div className={cx('etc')}>
                 <Button 
                     className={'wordContainerButton'} 
                     onClick={handleSound}
@@ -41,4 +39,4 @@ class Result extends Component {
     }
 }
 
-export default Result;
+export default Etc;

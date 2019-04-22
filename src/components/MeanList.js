@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Map, List} from 'immutable';
 
 import styles from '../style/modal.module.scss';
 import classNames from 'classnames/bind';
@@ -44,7 +43,6 @@ class MeanList extends Component {
     
     render() {
         const { means, onRemove, toggleMode, onChange } = this.props;
-        const { handleRemove, handleBlur, handleKeyPress} = this;
 
         const meanList = means.map( 
             mean => (

@@ -74,7 +74,6 @@ export default handleActions ({
         return state.setIn(['word','means'], means.delete(index));
     },
     [CHANGE_MEAN]: (state, action) => {
-        const means = state.getIn(['word', 'means']);
         const {index, mean} = action.payload;
         
         return state.mergeIn(['word', 'means', index], Map ({isEditMode:false, mean:mean}) );

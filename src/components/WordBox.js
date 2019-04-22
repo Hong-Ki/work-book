@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Map, List} from 'immutable';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import classNames from 'classnames/bind';
@@ -8,7 +7,7 @@ import styles from '../style/word.module.scss';
 
 import Word from './Word';
 import Means from './Means';
-import Result from './Result';
+import Etc from './Etc';
 
 import { FiSquare, FiCheckSquare} from 'react-icons/fi';
 
@@ -70,7 +69,7 @@ class WordBox extends Component {
                     means={word.get('means')}
                     mode={mode}
                 />
-                <Result
+                <Etc
                     id={word.get('id')}
                     word={word.get('word')}
                     onRemove={onRemove}

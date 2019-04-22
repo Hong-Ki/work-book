@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {Map, List} from 'immutable';
-import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
+import {Map} from 'immutable';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import shortid from 'shortid';
@@ -160,7 +158,7 @@ class WordModalContainer extends Component {
 
     render () {
         const {handleMean, handleChange, handleWord, handleCancel} = this;
-        const {modal, words} = this.props;
+        const {modal} = this.props;
 
         return (
             <div>
