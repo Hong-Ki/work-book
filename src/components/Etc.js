@@ -27,9 +27,9 @@ class Etc extends Component {
         const {handleSound} = this;
         
         return (
-            <div className={cx('etc')}>
+            <div className={cx(['etc','last'])}>
                 <Button 
-                    className={'wordContainerButton'} 
+                    className={['wordContainerButton','pulse']} 
                     onClick={handleSound}
                 >
                     <IoMdVolumeHigh />

@@ -39,35 +39,47 @@ class WordBox extends Component {
         onEdit(word.get('id'));
     }
 
+    handleBlur = (e) => {
+        const {onBlur, word} = this.props;
+        const {value} = e.target;
+
+        onBlur(word.get('id'), value);
+        
+    }
+
     render() {
         const { word,mode, onRemove } = this.props;
-        const {handleEdit, handleCheck} = this;
+        const {handleEdit, handleCheck, handleBlur} = this;
         return (
             <div className={cx('container')}
                 key={word.get('id')}
-                onClick={handleEdit}
+                onClick={ (mode!=='TEST') ? handleEdit:null}
             >   
-                <div
-                    className={cx('check')}
-                    >
-                    <input
-                        id={word.get('id')}
-                        onClick={handleCheck}
-                        type={'checkbox'}
-                        />
-                    <label 
-                        onClick={handleCheck}
-                        htmlFor={word.get('id')}
-                    >
-                        <FiSquare/><FiCheckSquare/>
-                    </label>
-                </div>
+                { (mode!=='TEST') && (
+                    <div
+                        className={cx(['check','first'])}
+                        >
+                        <input
+                            id={word.get('id')}
+                            onClick={handleCheck}
+                            type={'checkbox'}
+                            />
+                        <label 
+                            onClick={handleCheck}
+                            htmlFor={word.get('id')}
+                        >
+                            <FiSquare/><FiCheckSquare/>
+                        </label>
+                    </div>
+                )}
                 <Word 
                     word={word.get('word')} 
+                    mode={mode}
                     />
                 <Means
                     means={word.get('means')}
                     mode={mode}
+                    onBlur={handleBlur}
                 />
                 <Etc
                     id={word.get('id')}

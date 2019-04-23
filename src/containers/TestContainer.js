@@ -12,19 +12,13 @@ import WordBoxList from '../components/WordBoxList';
 
 import classNames from 'classnames/bind';
 
-class WordBoxListContainer extends Component {
-
-    
+class TestContainer extends Component {
 
     render() {
         const {words, keyword, mode} = this.props;
 
         return (
-            <WordBoxList
-                words={words}
-                search={keyword}
-                mode={mode}
-            />
+            <div></div>
         )
     }
 }
@@ -32,13 +26,12 @@ class WordBoxListContainer extends Component {
 export default connect(
 
     (state) => ({
-        keyword: '',
-        //keyword: state.get('keyword'),
         words : state.words,
-        mode : 'test'
+        mode : state.base.get('mode')
     }),
     (dispatch) => ({
         WordActions: bindActionCreators(wordsActions, dispatch),
         TestActions: bindActionCreators(testActions, dispatch)
     })
+
 ) (WordBoxListContainer);

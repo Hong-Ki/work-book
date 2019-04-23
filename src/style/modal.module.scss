@@ -1,4 +1,4 @@
-@import './util.module.scss';
+@import 'utils';
 
 @mixin modalButton ($background, $hoverColor, $color, $float) {
     background: $background;
@@ -169,4 +169,80 @@
 
 .cancel {
     @include modalButton( $oc-gray-5, $oc-gray-6, white, right )
+}
+
+.result {
+    position: absolute;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 0%;
+    opacity: 0;
+    height: 100%;
+    
+    color:$oc-red-7;
+    background: white;
+    
+}
+        .total { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90%;
+            margin-top: auto;
+            font-size: 14em;
+        }
+        
+        .correct {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90%;
+            margin-bottom:auto;
+            font-weight: 700;
+            font-size: 23em;
+        }
+
+@keyframes open-result {
+    0% {
+        opacity: 0;
+        transform : scale(3)
+    }
+    40% {
+        opacity: 0;
+        transform : scale(3)
+    }
+    60% {
+        transform: scale(0.8)
+    }
+    70% {
+        transform: scale(1)
+    }
+    80%{
+        transform: scale(0.8)
+    }
+    100% {
+        transform : scale(1)
+    }
+}
+
+.open {
+    animation-delay: 2s;
+    opacity: 1;
+    animation: open-result 2s;
+}
+
+.close {
+    width: 0;
+    opacity: 0;
+}
+
+.open-wrapper {
+    width: 100%;
+    right: 0;
+    opacity: 1;
+    transition-duration: 1s;
 }

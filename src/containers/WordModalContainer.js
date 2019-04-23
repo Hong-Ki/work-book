@@ -8,8 +8,10 @@ import Word from '../class/Word';
 
 import * as wordsActions from '../modules/words';
 import * as modalActions from '../modules/modal';
+import * as baseActions from '../modules/base';
 
 import Modal from '../components/Modal'
+import Result from '../components/Result'
 
 class WordModalContainer extends Component {
     handleMean = {
@@ -156,9 +158,16 @@ class WordModalContainer extends Component {
         );
     }
 
+    handleClick =()=> {
+        const {ModalActions} = this.props;
+        ModalActions.hideResult();
+    }
+
     render () {
         const {handleMean, handleChange, handleWord, handleCancel} = this;
-        const {modal} = this.props;
+        const {modal, wrong, correct} = this.props;
+        const {resultVisible} = this.props;
+        const {handleClick} = this;
 
         return (
             <div>
@@ -177,6 +186,12 @@ class WordModalContainer extends Component {
                                     />
                     )
                 }
+                <Result
+                    wrong={wrong}
+                    correct={correct}
+                    resultVisible={resultVisible}
+                    onClick={handleClick}
+                />
             </div>
         );
     }
@@ -184,7 +199,10 @@ class WordModalContainer extends Component {
 
 export default connect(
     (state) => ({
-        modal:state.modal
+        modal:state.modal,
+        wrong:state.test.get('wrong'),
+        correct:state.test.get('correct'),
+        resultVisible: state.modal.get('resultVisible')
     }),
     (dispatch) => ({
         WordsActions: bindActionCreators(wordsActions, dispatch),

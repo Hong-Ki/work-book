@@ -28,17 +28,19 @@ class Word extends Component {
     }
 
     render() {
-        const { word } = this.props;
+        const { word,mode } = this.props;
 
         return (
             <div
-                className={cx('word')}
+                className={cx( mode!=='TEST' ? 'word' : ['word','first'] )}
             >
-                <span
-                    ref={this.ref}
-                >
-                    {word}
-                </span>
+                <div>
+                    <span
+                        ref={this.ref}
+                    >
+                        {word}
+                    </span>
+                </div>
             </div>
         )
     }

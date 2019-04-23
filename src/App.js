@@ -6,6 +6,7 @@ import HeaderContainer from './containers/HeaderContainer';
 import WordBoxListContainer from './containers/WordBoxListContainer';
 import WordModalContainer from './containers/WordModalContainer';
 import FooterContainer from './containers/FooterContainer';
+import MenuContainer from './containers/MenuContainer';
 
 import * as wordsActions from './modules/words';
 
@@ -29,25 +30,26 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <div className={cx('wrapper')}>
         <HeaderContainer/>
         
         <div className={cx('body')}>
-          <WordBoxListContainer />
+            <WordBoxListContainer />
         </div>
 
         <FooterContainer/>
-        <WordModalContainer/>
 
+        <MenuContainer/>
+        <WordModalContainer/>
       </div>
     );
   }
 }
 
 export default connect(
-  (state) => ({
-  }),
+  null,
   (dispatch) => ({
     WordsActions : bindActionCreators(wordsActions, dispatch)
   })

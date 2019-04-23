@@ -9,6 +9,9 @@ const ADD_MEAN = 'modal/ADD_MEAN';
 const REMOVE_MEAN = 'modal/REMOVE_MEAN';
 const CHANGE_MEAN = 'modal/CHANGE_MEAN';
 
+const SHOW_RESULT = 'modal/result/SHOW';
+const HIDE_RESULT = 'modal/result/HIDE';
+
 export const show = createAction(SHOW);
 export const hide = createAction(HIDE);
 export const change = createAction(CHANGE); // {word, mean}
@@ -17,9 +20,12 @@ export const addMean = createAction(ADD_MEAN); // Map{ mean:string, id:string, i
 export const removeMean = createAction(REMOVE_MEAN); // index
 export const changeMean = createAction(CHANGE_MEAN); // input{ index, mean}
 
+export const showResult = createAction(SHOW_RESULT);
+export const hideResult = createAction(HIDE_RESULT);
 
 const initialState = Map ( {
     visible:false,
+    resultVisible:false,
     mode:'',
     word: Map ( {
         id : null,
@@ -78,5 +84,11 @@ export default handleActions ({
         
         return state.mergeIn(['word', 'means', index], Map ({isEditMode:false, mean:mean}) );
 
-    }
+    },
+    [SHOW_RESULT]: (state,actoin) => {
+        return state.set('resultVisible',true);
+    },
+    [HIDE_RESULT]: (state,actoin) => {
+        return state.set('resultVisible',false);
+    },
 }, initialState);

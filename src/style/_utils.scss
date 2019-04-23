@@ -1,0 +1,16 @@
+@import '~open-color/open-color';
+
+@mixin placeholder($color) {
+    &::placeholder {
+        color: $color;
+        opacity: 1;
+    }
+    
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: $color;
+    }
+    
+    &::-ms-input-placeholder { /* Microsoft Edge */
+        color: $color;
+    }
+}

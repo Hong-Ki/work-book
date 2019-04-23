@@ -1,4 +1,4 @@
-@import '~open-color/open-color';
+@import 'utils';
 
 @keyframes show {
     from {
@@ -42,34 +42,35 @@
     }
 }
 
-@mixin contents ($width, $radius) {
+@mixin contents ($width) {
     transition: all 0.2s ease-out;
     height: 100%;
     display: flex;
     width: $width * 1vw;
-    border-radius: $radius;
     color : $oc-red-5;
     box-shadow: 1px 1px 7px 0px $oc-red-2;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 
-    &>span {
-        position: relative;
-        white-space: nowrap;
-    }
+    border-radius: auto;
     
     font-size: 1.1em;
     font-weight: 400;        
+
 }
 
 .overflowText {
     
     animation: text-move 15s infinite linear;
+    animation-play-state: running;
+    &:hover {
+        animation-play-state: paused;
+    }
 }
 
 .check {
-    @include contents(10, 1em 0 0 1em);
+    @include contents(10);
 
     &>input {
         display: none;
@@ -109,12 +110,59 @@
     border-right: 0px;
 }
 .word {
-    @include contents(17, auto );
+    @include contents(17 );
+    
+    &>div {
+        overflow: hidden;
+        width: 95%;
+        display: flex;
+    
+        align-items: center;
+        justify-content: center;
+    
+        &>span {
+            position: relative;
+            white-space: nowrap;
+        }
+    }
 }
+
 .mean {
-    @include contents(60, auto );
+    @include contents(60 );
+
+    &>div {
+        overflow: hidden;
+        width: 95%;
+        display: flex;
+    
+        align-items: center;
+        justify-content: center;
+    
+        &>span {
+            position: relative;
+            white-space: nowrap;
+        }
+    }
+
+    &>input {
+        width:95%;
+        height: 70%;
+        border:1px solid $oc-red-2;
+        color: $oc-red-4;
+
+        @include placeholder($oc-red-3);
+    }
+
 }
 .etc {
-    @include contents(13, 0 1em 1em 0 );
+    @include contents(13);
     border-left: 0px;
+}
+
+.first {
+    border-radius: 0 0 0 1em;
+}
+
+.last {
+    border-radius: 0 1em 0 0;
 }

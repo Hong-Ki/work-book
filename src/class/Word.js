@@ -4,12 +4,13 @@ import shortid from 'shortid';
 const defaultWord = {
     means : [],
     word : '',
-    isComplete : false
+    id:'',
+    isComplete : false,
+    completeCount: -1
 };
 
 class Word {
     constructor( word ) {
-        this.id = shortid.generate();
         for ( let key in defaultWord ) {
             this[key] = word[key] || defaultWord[key];
         }
@@ -51,8 +52,20 @@ class Word {
             means : List(this.means),
             word : this.word,
             id : this.id,
-            isComplete : this.isComplete
+            isComplete : this.isComplete,
+            completeCount : this.completeCount
         });
+    }
+
+    toTest = () => {
+        return this.toImmutable()
+                    .set('isCorrect', false)
+                    .set('answers', List([]))
+                    .set('means', List(this.means)
+                        .map(
+                            mean => mean.replace(/ /g,'')
+                        )
+                    );
     }
 }
 

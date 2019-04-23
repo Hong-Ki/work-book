@@ -27,6 +27,9 @@ const InputWithButton = React.forwardRef( (props,ref) => (
                 onKeyDown={props.onKeyDown}
                 onChange={props.onChange}
                 onBlur={props.onBlur}
+                onFocus={props.onFocus}
+                readOnly={props.readonly}
+                disabled={props.disabled}
             />
             <Button
                 className={cx(props.buttonClassName)}

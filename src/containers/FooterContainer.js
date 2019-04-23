@@ -8,6 +8,7 @@ import {List} from 'immutable';
 import * as modalActions from '../modules/modal';
 import * as wordsActions from '../modules/words';
 import * as baseActions from '../modules/base';
+import * as testActions from '../modules/test';
 
 import * as styles from '../style/layout.module.scss';
 
@@ -19,17 +20,15 @@ const cx = classNames.bind(styles);
 
 class FooterContainer extends Component {
 
-    constructor (props) {
-        super(props);
-
-        this.ref = React.createRef();
-    }
-
     handleShow = () => {
         const {ModalActions} = this.props;
+        const input = document.createElement('input');
+        input.onchange = this.checkFile;
+        input.accept= 'application/json';
+        input.type='file';
  
-        if (window.confirm('Do you want add word from file?')) {
-            this.ref.current.click();
+        if (window.confirm('Do you want add word from JSON file?')) {
+            input.click();
             return;
         }
 
@@ -52,12 +51,17 @@ class FooterContainer extends Component {
         
     }
 
-    handleChange = (e) => {
+    checkFile = (e) => {
         const file = e.target.files[0];
         const fr = new FileReader();
 
+        if (e.target.value === '' ) {
+            return;
+        }
+
         if ( file.type !== e.target.accept ) {
             window.alert('It is wrong file type!');
+            e.target.value='';
             return;
         }
 
@@ -72,22 +76,32 @@ class FooterContainer extends Component {
                 window.alert( 'Error of parsing. please check your file this site : https://jsonlint.com' );
                 return;
             }
-
         }
-
+        
         fr.readAsText(file);
+
+
+    }
+
+    handleSubmit = () => {
+        const {TestActions,ModalActions} = this.props;
+
+        TestActions.submit();
+        ModalActions.showResult();
     }
 
     render () {
-        const {handleShow, handleRemove, handleChange} = this;
+        const {handleShow, handleRemove, handleSubmit} = this;
+        const {mode} = this.props;
 
-        return (
+        const buttons = (mode !== 'TEST') ?
+        (
             <div 
                 className={cx('footer')}
             >
                 <Button
                     onClick={handleShow}
-                >
+                    >
                     <MdAdd/>
                 </Button>
                 <Button
@@ -95,12 +109,25 @@ class FooterContainer extends Component {
                 >
                     <MdRemove/>
                 </Button>
-                <input 
-                    ref = {this.ref}
-                    type='file'
-                    onChange={handleChange}
-                    accept={'application/json'}
-                />
+                
+            </div>
+        )
+        :
+        (
+            <div 
+                className={cx('footer')}
+            >
+                <Button
+                    onClick={handleSubmit}
+                >
+                    SUBMIT
+                </Button>
+            </div>
+        )
+
+        return (
+            <div>
+                {buttons}
             </div>
         )
     }
@@ -108,11 +135,12 @@ class FooterContainer extends Component {
 
 export default connect(
     (state) => ({
-        addButton : state.base.get('addButton')
+        mode : state.base.get('mode')
     }),
     (dispatch) => ({
         ModalActions : bindActionCreators(modalActions, dispatch),
         WordsActions : bindActionCreators(wordsActions, dispatch),
-        BaseActions : bindActionCreators(baseActions, dispatch)
+        BaseActions : bindActionCreators(baseActions, dispatch),
+        TestActions : bindActionCreators(testActions, dispatch)
     })
 ) (FooterContainer);

@@ -6,9 +6,6 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import styles from '../style/word.module.scss';
 import classNames from 'classnames/bind';
 
-//Component
-import TestForm from './TestForm';
-
 const cx = classNames.bind(styles);
 
 class Means extends Component {
@@ -20,7 +17,19 @@ class Means extends Component {
 
     componentDidMount(prevProps, prevState, snapshot) {
         const current = this.ref.current;
-        
+        if (current === null ) {
+            return;
+        }
+        if (current.offsetWidth > current.parentElement.offsetWidth ) {
+            current.className = cx('overflowText');
+        }
+
+    }
+    componentDidUpdate(prevProps, prevState) {
+        const current = this.ref.current;
+        if (current === null ) {
+            return;
+        }
         if (current.offsetWidth > current.parentElement.offsetWidth ) {
             current.className = cx('overflowText');
         }
@@ -32,20 +41,18 @@ class Means extends Component {
             PropTypes.string
         ),
         mode : PropTypes.string,
-        onChange : PropTypes.func,
-        onTest : PropTypes.func
+        onBlur : PropTypes.func
     }
 
     render() {
-        const { means, mode, onChange, onTest, onEdit } = this.props;
+        const { means, mode, onBlur, onEdit } = this.props;
         let contents;
 
-        if ( mode === 'test' ) {
+        if ( mode === 'TEST' ) {
             contents = (
-                <TestForm
-                    means={means}
-                    onChange={onChange}
-                    onTest={onTest}
+                <input
+                    placeholder={'ex) Mean1, Mean2'}
+                    onBlur={onBlur}
                 />
             )
         } else {
@@ -53,6 +60,16 @@ class Means extends Component {
             for ( let i=1; i<means.size; i++ ) {
                 contents += (", "+means.toJS()[i]);
             }
+
+            contents = (
+                <div>
+                    <span
+                        ref={this.ref}
+                    >
+                        {contents}
+                    </span>
+                </div>
+            )
         }
         
         return (
@@ -60,11 +77,7 @@ class Means extends Component {
                 onClick={onEdit}
                 className={cx('mean')}
             >
-                <span
-                    ref={this.ref}
-                >
-                    {contents}
-                </span>
+                {contents}
             </div>
         )
     }

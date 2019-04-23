@@ -5,7 +5,7 @@ import WordBox from './WordBox';
 class WordBoxList extends Component {
 
     render() {
-        const { words, mode, onEdit, onRemove, keyword } = this.props;
+        const { words, mode, onEdit, onRemove, keyword, onBlur } = this.props;
         const wordList = words
                             .filter(
                                 word => word.get('means').filter( mean => mean.indexOf(keyword) !== -1 ).size > 0
@@ -20,6 +20,7 @@ class WordBoxList extends Component {
                                         mode={mode}
                                         onEdit={onEdit}
                                         onRemove={onRemove}
+                                        onBlur={onBlur}
                                     />
                             )
 
