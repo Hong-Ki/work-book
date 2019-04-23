@@ -60,8 +60,14 @@ class MenuContainer extends Component {
                             <div 
                                 className={cx('menu')}
                                 onClick={handleSelectMenu}
-                            >
+                                >
                                 TEST
+                            </div>
+                            <div
+                                className={cx('menu')}
+                                onClick={handleSelectMenu}
+                            >
+                                FILE FORM
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,6 @@ export const switchMenu = createAction(SWITCH_MENU);
 
 const initialState = Map({
     keyword:'',
-    //mode:'WORDS',
     mode:'WORDS',
     isActiveMenu:false
 });

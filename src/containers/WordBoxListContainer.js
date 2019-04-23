@@ -78,6 +78,7 @@ class WordBoxListContainer extends Component {
                     onEdit={handleEdit}
                     onRemove={handleRemove}
                     onBlur={handleBlur}
+                    isAtive={mode !== 'FILE FORM'}
                 />
         )
     }

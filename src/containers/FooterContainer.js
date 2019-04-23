@@ -84,9 +84,10 @@ class FooterContainer extends Component {
     }
 
     handleSubmit = () => {
-        const {TestActions,ModalActions} = this.props;
+        const {TestActions,ModalActions,BaseActions} = this.props;
 
         TestActions.submit();
+        BaseActions.setMode('WORDS');
         ModalActions.showResult();
     }
 

@@ -8,6 +8,8 @@ import WordModalContainer from './containers/WordModalContainer';
 import FooterContainer from './containers/FooterContainer';
 import MenuContainer from './containers/MenuContainer';
 
+import FileForm from './components/FileForm';
+
 import * as wordsActions from './modules/words';
 
 import * as layout from './style/layout.module.scss';
@@ -30,13 +32,16 @@ class App extends Component {
   }
 
   render() {
-    
+    const {mode} = this.props;
     return (
       <div className={cx('wrapper')}>
         <HeaderContainer/>
         
         <div className={cx('body')}>
-            <WordBoxListContainer />
+            <WordBoxListContainer/>
+            <FileForm
+              mode={mode}
+            />
         </div>
 
         <FooterContainer/>
@@ -49,7 +54,9 @@ class App extends Component {
 }
 
 export default connect(
-  null,
+  (state) => ({
+    mode : state.base.get('mode')
+  }),
   (dispatch) => ({
     WordsActions : bindActionCreators(wordsActions, dispatch)
   })
