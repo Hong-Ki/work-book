@@ -8,7 +8,6 @@ import * as testActions from '../modules/test';
 import * as modalActions from '../modules/modal';
 import * as baseActions from '../modules/base';
 
-import Result from '../components/WordBoxList';
 import WordBoxList from '../components/WordBoxList';
 import Word from '../class/Word';
 

@@ -8,7 +8,6 @@ import Word from '../class/Word';
 
 import * as wordsActions from '../modules/words';
 import * as modalActions from '../modules/modal';
-import * as baseActions from '../modules/base';
 
 import Modal from '../components/Modal'
 import Result from '../components/Result'
@@ -130,7 +129,7 @@ class WordModalContainer extends Component {
                 window.alert(msg);
                 return;
             }
-            
+
             WordsActions.update(
                 new Word( 
                     modal.get('word')

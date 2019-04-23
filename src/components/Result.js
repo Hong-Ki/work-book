@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import classNames from 'classnames/bind';
 
 import * as styles from '../style/modal.module.scss';
-import {FaQuestion} from 'react-icons/fa'
-import Button from './Button';
 
 const cx = classNames.bind(styles);
 
