@@ -1,4 +1,4 @@
-import {Map, List, fromJS} from 'immutable';
+import {Map, List, fromJS, isImmutable} from 'immutable';
 import shortid from 'shortid';
 
 const defaultWord = {
@@ -11,8 +11,11 @@ const defaultWord = {
 
 class Word {
     constructor( word ) {
+        const isImmu = isImmutable(word);
+
         for ( let key in defaultWord ) {
-            this[key] = word[key] || defaultWord[key];
+            this[key] = (isImmu ? word.get(key) : word[key] ) 
+                            || defaultWord[key];
         }
     }
 
@@ -27,7 +30,6 @@ class Word {
 
         return isEqual;
     }
-
     fromModal = () => {
         this.means = this.means.map( mean => mean.get('mean') );
 

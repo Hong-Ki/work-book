@@ -96,7 +96,7 @@ class WordModalContainer extends Component {
                 window.alert(msg);
                 return;
             }
-
+            
             WordsActions.create( 
                 new Word (
                     {
@@ -133,7 +133,7 @@ class WordModalContainer extends Component {
             
             WordsActions.update(
                 new Word( 
-                    modal.get('word').toJS() 
+                    modal.get('word')
                 ).fromModal()
             );
             ModalActions.hide();
