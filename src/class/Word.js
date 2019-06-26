@@ -1,75 +1,74 @@
-import {Map, List, fromJS, isImmutable} from 'immutable';
+import { Map, List, fromJS, isImmutable } from 'immutable';
 import shortid from 'shortid';
 
 const defaultWord = {
-    means : [],
-    word : '',
-    id:'',
-    isComplete : false,
-    completeCount: -1
+  means: [],
+  word: '',
+  id: '',
+  isComplete: false,
+  completeCount: -1,
 };
 
 class Word {
-    constructor( word ) {
-        const isImmu = isImmutable(word);
+  constructor(word) {
+    const isImmu = isImmutable(word);
 
-        for ( let key in defaultWord ) {
-            this[key] = (isImmu ? word.get(key) : word[key] ) 
-                            || defaultWord[key];
-        }
+    for (const key in defaultWord) {
+      this[key] = (isImmu ? word.get(key) : word[key]) || defaultWord[key];
     }
 
-    isEqual = ( word ) => {
-        let isEqual = true;
-        for (let key in defaultWord) {
-            isEqual = isEqual && this[key].toString() === word[key].toString();
-            if (!isEqual) {
-                break;
-            }
-        }
-
-        return isEqual;
+    if (this.id === '') {
+      this.id = shortid.generate();
     }
-    fromModal = () => {
-        this.means = this.means.map( mean => mean.get('mean') );
+  }
 
-        return this;
+  isEqual = word => {
+    let isEqual = true;
+    for (const key in defaultWord) {
+      isEqual = isEqual && this[key].toString() === word[key].toString();
+      if (!isEqual) {
+        break;
+      }
     }
 
-    toModal = () => {
-        //withImmutable
-        const word = fromJS( Map(this) )
-                    .set('means', List(
-                        this.means.map (
-                            mean => Map(
-                                { id:shortid.generate(), mean:mean, isEditMod:false}
-                            )
-                        )
-                    ));
-        return word;
-    }
+    return isEqual;
+  };
 
-    toImmutable = () => {
-        return Map({
-            means : List(this.means),
-            word : this.word,
-            id : this.id,
-            isComplete : this.isComplete,
-            completeCount : this.completeCount
-        });
-    }
+  fromModal = () => {
+    this.means = this.means.map(mean => mean.get('mean'));
 
-    toTest = () => {
-        return this.toImmutable()
-                    .set('isCorrect', false)
-                    .set('answers', List([]))
-                    .set('means', List(this.means)
-                        .map(
-                            mean => mean.replace(/ /g,'')
-                        )
-                    );
-    }
+    return this;
+  };
+
+  toModal = () => {
+    // withImmutable
+    const word = fromJS(Map(this)).set(
+      'means',
+      List(
+        this.means.map(mean =>
+          Map({ id: shortid.generate(), mean, isEditMod: false }),
+        ),
+      ),
+    );
+    return word;
+  };
+
+  toImmutable = () => {
+    return Map({
+      means: List(this.means),
+      word: this.word,
+      id: this.id,
+      isComplete: this.isComplete,
+      completeCount: this.completeCount,
+    });
+  };
+
+  toTest = () => {
+    return this.toImmutable()
+      .set('isCorrect', false)
+      .set('answers', List([]))
+      .set('means', List(this.means).map(mean => mean.replace(/ /g, '')));
+  };
 }
-
 
 export default Word;
